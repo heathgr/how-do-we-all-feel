@@ -5,6 +5,7 @@ const ActionTypes = {
   PROFILE_CREATION_FAILED: 'profile creation failed',
   TOTALS_UPDATED: 'totals updated',
   CONNECTION_ERROR: 'connection error',
+  ON_AUTH: 'on auth',
 };
 
 export default ActionTypes;
