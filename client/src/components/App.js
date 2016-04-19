@@ -20,7 +20,7 @@ class App extends Component {
     return <div>
       <Notifications/>
       <Graph/>
-      <Menu/>
+      <Menu authData={this.props.authData}/>
     </div>;
   }
 }

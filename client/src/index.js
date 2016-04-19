@@ -18,8 +18,5 @@ function render() {
   );
 };
 
-// dispatch(authActions.listenToAuth());
-// dispatch(votingActions.listenToTallies());
-
 store.subscribe(render);
 render();

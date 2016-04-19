@@ -3,9 +3,14 @@ import { firebaseRef } from '../helpers/firebaseHelpers';
 
 const listenToAuth = () => {
   return (dispatch, state) => {
-    dispatch(
-      {
-        type: types.ON_AUTH,
+    firebaseRef.onAuth(
+      (authData) => {
+        dispatch(
+          {
+            type: types.AUTH,
+            data: authData,
+          }
+        );
       }
     );
   };

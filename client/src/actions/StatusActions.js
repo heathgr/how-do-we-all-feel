@@ -6,7 +6,10 @@ const listenToTotals = () => {
     const totalsRef = firebaseRef.child('totals');
 
     totalsRef.on('value', (snapshot) => {
-      console.log('totals', snapshot.val());
+      dispatch({
+        type: types.TOTALS_UPDATED,
+        data: snapshot.val(),
+      });
     });
   };
 };
