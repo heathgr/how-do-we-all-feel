@@ -14,14 +14,18 @@ describe('<App/>', () => {
 
   chai.use(chaiEnzyme());
 
-  const appWrapper = mount(<App dispatch={() => {}}/>);
+  const user = {
+    authData: null,
+    profile: null,
+  }
+  const appWrapper = mount(<App dispatch={() => {}} user={user} />);
 
   it('should contain a graph component', () => {
     expect(appWrapper).to.contain(<Graph/>);
   });
 
   it('should contain a menu component', () => {
-    expect(appWrapper).to.contain(<Menu/>);
+    expect(appWrapper).to.contain(<Menu onSignIn={appWrapper.node.onSignIn} user={user}/>);
   });
 
   it('should contain a notifications components', () => {

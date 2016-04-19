@@ -1,1 +1,9 @@
-module.exports = 'localhost.firebaseio.test:5000';
+const url = 'https://hdwaf-development.firebaseio.com/';
+const port = null;
+const fullUrl = url;
+
+module.exports = {
+  url,
+  port,
+  fullUrl,
+};
