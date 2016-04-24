@@ -10,7 +10,7 @@ import Graph from '../../src/components/Graph';
 import Menu from '../../src/components/Menu';
 import Notifications from '../../src/components/Notifications';
 
-describe('<App/>', () => {
+describe('<App />', () => {
 
   chai.use(chaiEnzyme());
 
