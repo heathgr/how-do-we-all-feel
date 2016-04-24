@@ -9,6 +9,12 @@ import * as statusActions from '../actions/StatusActions';
 class App extends Component {
   constructor (props) {
     super(props);
+
+    this.onSignIn = this.onSignIn.bind(this);
+  }
+
+  onSignIn () {
+    this.props.dispatch(authActions.signIn());
   }
 
   componentDidMount () {
@@ -20,7 +26,7 @@ class App extends Component {
     return <div>
       <Notifications/>
       <Graph/>
-      <Menu authData={this.props.authData}/>
+      <Menu user={this.props.user} onSignIn={this.onSignIn}/>
     </div>;
   }
 }

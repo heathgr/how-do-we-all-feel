@@ -4,7 +4,7 @@
   "description": "An app I'm writting to better learn firebase and see how well react works with svgs.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --require client/jsdom.config.js --compilers js:babel-core/register --recursive client/spec/**/*.spec.js client/spec/**/**/*.spec.js"
+    "test": "node test.js"
   },
   "author": "Grant Heath",
   "license": "ISC",
