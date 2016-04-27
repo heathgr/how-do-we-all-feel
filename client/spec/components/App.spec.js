@@ -17,7 +17,14 @@ describe('<App />', () => {
   const user = {
     authData: null,
     profile: null,
-  }
+  };
+
+  const onSignIn = () => {};
+
+  const onSignOut = () => {};
+
+  const onCreateProfile = () => {};
+
   const appWrapper = mount(<App dispatch={() => {}} user={user} />);
 
   it('should contain a graph component', () => {
@@ -25,7 +32,12 @@ describe('<App />', () => {
   });
 
   it('should contain a menu component', () => {
-    expect(appWrapper).to.contain(<Menu onSignIn={appWrapper.node.onSignIn} user={user}/>);
+    expect(appWrapper).to.contain(<Menu
+      onSignIn={appWrapper.node.onSignIn}
+      onSignOut={appWrapper.node.onSignOut}
+      onCreateProfile={appWrapper.node.onCreateProfile}
+      user={user}
+    />);
   });
 
   it('should contain a notifications components', () => {

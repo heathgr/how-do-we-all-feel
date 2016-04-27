@@ -6,7 +6,14 @@ class UpdateStatus extends Component {
   }
 
   render () {
-    return <div>Update Your Status...</div>;
+    return <div>
+      <h2>Update Your Status...</h2>
+      <button>I am happy</button>
+      <button>I am sad</button>
+      <button>I am bored</button>
+      <button>I am angry</button>
+      <button>I am horny</button>
+    </div>;
   }
 }
 

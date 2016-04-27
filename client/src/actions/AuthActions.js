@@ -1,3 +1,4 @@
+import Firebase from 'firebase';
 import { default as types } from '../constants/ActionTypes';
 import { firebaseRef } from '../helpers/firebaseHelpers';
 
@@ -19,15 +20,19 @@ const signIn = () => {
   };
 };
 
-const createProfile = (ageRangeId, genderId) => {
+const createProfile = (ageRange, gender) => {
   return (dispatch) => {
     const authData = firebaseRef.getAuth();
 
+    console.log('ts', Firebase.ServerValue.TIMESTAMP);
     if (authData) {
+      //TODO intialize an array for status history?
       const profile = {
-        displayName: auth.google.displayName,
-        ageRangeId,
-        genderId,
+        displayName: authData.google.displayName,
+        ageRange,
+        gender,
+        status: null,
+        updateTimestamp: Firebase.ServerValue.TIMESTAMP,
       };
 
       firebaseRef.child('user-profiles/' + authData.uid + '/').set(profile, (error) => {
@@ -92,7 +97,7 @@ const listenToAuth = () => {
   };
 };
 
-const signOff = () => {
+const signOut = () => {
   return (dispatch) => {
     firebaseRef.unauth();
     dispatch({
@@ -101,4 +106,4 @@ const signOff = () => {
   };
 };
 
-export { listenToAuth, signIn, createProfile };
+export { listenToAuth, signIn, signOut, createProfile };

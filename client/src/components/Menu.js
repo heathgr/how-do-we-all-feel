@@ -16,7 +16,11 @@ class Menu extends Component {
     } else if (!this.props.user.authData && !this.props.user.profile) {
       menuComponent = <SignIn onSignIn={this.props.onSignIn}/>;
     } else if (this.props.user.authData.uid && !this.props.user.profile) {
-      menuComponent = <CreateProfile />;
+      menuComponent = <CreateProfile
+        user={ this.props.user }
+        onCreateProfile={ this.props.onCreateProfile }
+        onSignOut={ this.props.onSignOut }
+      />;
     } else if (this.props.user.authData.uid && this.props.user.profile) {
       return <UpdateStatus />;
     }
@@ -28,6 +32,8 @@ class Menu extends Component {
 Menu.propTypes = {
   user: PropTypes.object,
   onSignIn: PropTypes.func.isRequired,
+  onSignOut: PropTypes.func.isRequired,
+  onCreateProfile: PropTypes.func.isRequired,
 };
 
 export default Menu;

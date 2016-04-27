@@ -16,7 +16,18 @@ describe('<Menu />', () => {
   chai.use(chaiEnzyme);
 
   it('should display nothing is there is no user data.', () => {
-    const menuWrapper = mount(<Menu user={null} onSignIn={() => {}}/>);
+    const onSignIn = () => {};
+
+    const onSignOut = () => {};
+
+    const onCreateProfile = () => {};
+
+    const menuWrapper = mount(<Menu
+      user={null}
+      onSignIn={onSignIn}
+      onSignOut={onSignOut}
+      onCreateProfile={onCreateProfile}
+    />);
 
     expect(menuWrapper).to.have.text('');
   });
@@ -24,7 +35,16 @@ describe('<Menu />', () => {
   it('should display a sign in component if the user isn\'t authenticated', () => {
     const onSignIn = () => {};
 
-    const menuWrapper = mount(<Menu user={{ authData: null, profile: null }} onSignIn={onSignIn}/>);
+    const onSignOut = () => {};
+
+    const onCreateProfile = () => {};
+
+    const menuWrapper = mount(<Menu
+      user={{ authData: null, profile: null }}
+      onSignIn={onSignIn}
+      onSignOut={onSignOut}
+      onCreateProfile={onCreateProfile}
+    />);
 
     expect(menuWrapper).to.contain(<SignIn onSignIn={onSignIn}/>);
   });
@@ -32,19 +52,39 @@ describe('<Menu />', () => {
   it('should display a create profile component if the user is authenticated and has no profile.', () => {
     const onSignIn = () => {};
 
+    const onSignOut = () => {};
+
+    const onCreateProfile = () => {};
+
     const user = {
       authData: {
-        uid: 2,
+        uid: 'google:77773857667',
+        google: {
+          displayName: 'Doctor Philastus Hurlbut',
+        },
       },
       profile: null,
     };
-    const menuWrapper = mount(<Menu onSignIn={ onSignIn } user={ user }/>);
+    const menuWrapper = mount(<Menu
+      onSignIn={ onSignIn }
+      onSignOut={ onSignOut }
+      onCreateProfile = { onCreateProfile }
+      user={ user }
+    />);
 
-    expect(menuWrapper).to.contain(<CreateProfile />);
+    expect(menuWrapper).to.contain(<CreateProfile
+      onSignOut={ onSignOut }
+      onCreateProfile = { onCreateProfile }
+      user={ user }
+    />);
   });
 
   it('should display an update component if the user is authenticated and has a profile.', () => {
     const onSignIn = () => {};
+
+    const onSignOut = () => {};
+
+    const onCreateProfile = () => {};
 
     const user = {
       authData: {
@@ -57,7 +97,12 @@ describe('<Menu />', () => {
         status: 2,
       },
     };
-    const menuWrapper = mount(<Menu onSignIn={ onSignIn } user={ user }/>);
+    const menuWrapper = mount(<Menu
+      onSignIn={ onSignIn }
+      onSignOut={ onSignOut }
+      onCreateProfile={ onCreateProfile }
+      user={ user }
+    />);
 
     expect(menuWrapper).to.contain(<UpdateStatus />);
   });

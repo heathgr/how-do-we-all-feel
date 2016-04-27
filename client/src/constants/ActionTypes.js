@@ -6,7 +6,7 @@ const ActionTypes = {
   TOTALS_UPDATED: 'totals updated',
   CONNECTION_ERROR: 'connection error',
   AUTH: 'on auth',
-  SIGN_OFF: 'sign out',
+  SIGN_OFF: 'sign off',
   SIGN_IN_SUCCESSFUL: 'sign in successful',
   SIGN_IN_FAILED: 'sign in failed',
 };

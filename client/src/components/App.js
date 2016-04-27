@@ -11,10 +11,8 @@ class App extends Component {
     super(props);
 
     this.onSignIn = this.onSignIn.bind(this);
-  }
-
-  onSignIn () {
-    this.props.dispatch(authActions.signIn());
+    this.onSignOut = this.onSignOut.bind(this);
+    this.onCreateProfile = this.onCreateProfile.bind(this);
   }
 
   componentDidMount () {
@@ -22,17 +20,34 @@ class App extends Component {
     this.props.dispatch(statusActions.listenToTotals());
   }
 
+  onSignIn () {
+    this.props.dispatch(authActions.signIn());
+  }
+
+  onSignOut () {
+    this.props.dispatch(authActions.signOut());
+  }
+
+  onCreateProfile (ageRange, gender) {
+    this.props.dispatch(authActions.createProfile(ageRange, gender));
+  }
+
   render () {
     return <div>
       <Notifications/>
       <Graph/>
-      <Menu user={this.props.user} onSignIn={this.onSignIn}/>
+      <Menu
+        user={this.props.user}
+        onSignIn={this.onSignIn}
+        onSignOut={this.onSignOut}
+        onCreateProfile={this.onCreateProfile}
+      />
     </div>;
   }
 }
 
 App.propTypes = {
-
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default App;

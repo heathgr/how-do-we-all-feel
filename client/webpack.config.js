@@ -22,7 +22,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      firebaseConfig: __dirname + '/../config/' + process.env.HDWAF_ENV + '/firebaseConfig',
+      firebaseConfig: __dirname + '/../config/firebase/' + process.env.HDWAF_ENV + '/firebaseConfig',
     }
   },
   module: {

@@ -1,6 +1,6 @@
 var spawn = require('child_process').spawn;
 
-process.env.NODE_PATH = __dirname + '/config/test/';
+process.env.NODE_PATH = __dirname + '/config/firebase/test/';
 
 var mochaThread = spawn(
   'mocha',

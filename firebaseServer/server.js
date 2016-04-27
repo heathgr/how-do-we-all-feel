@@ -1,5 +1,5 @@
 var FirebaseServer = require('firebase-server');
-var firebaseConfig = require('../config/' + process.env.HDWAF_ENV + '/firebaseConfig');
+var firebaseConfig = require('../config/firebase/' + process.env.HDWAF_ENV + '/firebaseConfig');
 var emoji = require('node-emoji');
 var data = require('./data');
 
