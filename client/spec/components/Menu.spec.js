@@ -22,11 +22,14 @@ describe('<Menu />', () => {
 
     const onCreateProfile = () => {};
 
+    const onUpdateStatus = () => {};
+
     const menuWrapper = mount(<Menu
       user={null}
       onSignIn={onSignIn}
       onSignOut={onSignOut}
       onCreateProfile={onCreateProfile}
+      onUpdateStatus={onUpdateStatus}
     />);
 
     expect(menuWrapper).to.have.text('');
@@ -39,11 +42,14 @@ describe('<Menu />', () => {
 
     const onCreateProfile = () => {};
 
+    const onUpdateStatus = () => {};
+
     const menuWrapper = mount(<Menu
       user={{ authData: null, profile: null }}
       onSignIn={onSignIn}
       onSignOut={onSignOut}
       onCreateProfile={onCreateProfile}
+      onUpdateStatus={onUpdateStatus}
     />);
 
     expect(menuWrapper).to.contain(<SignIn onSignIn={onSignIn}/>);
@@ -56,6 +62,8 @@ describe('<Menu />', () => {
 
     const onCreateProfile = () => {};
 
+    const onUpdateStatus = () => {};
+
     const user = {
       authData: {
         uid: 'google:77773857667',
@@ -66,16 +74,17 @@ describe('<Menu />', () => {
       profile: null,
     };
     const menuWrapper = mount(<Menu
-      onSignIn={ onSignIn }
-      onSignOut={ onSignOut }
-      onCreateProfile = { onCreateProfile }
-      user={ user }
+      onSignIn={onSignIn}
+      onSignOut={onSignOut}
+      onCreateProfile = {onCreateProfile}
+      onUpdateStatus = {onUpdateStatus}
+      user={user}
     />);
 
     expect(menuWrapper).to.contain(<CreateProfile
-      onSignOut={ onSignOut }
-      onCreateProfile = { onCreateProfile }
-      user={ user }
+      onSignOut={onSignOut}
+      onCreateProfile = {onCreateProfile}
+      user={user}
     />);
   });
 
@@ -85,6 +94,8 @@ describe('<Menu />', () => {
     const onSignOut = () => {};
 
     const onCreateProfile = () => {};
+
+    const onUpdateStatus = () => {};
 
     const user = {
       authData: {
@@ -101,9 +112,10 @@ describe('<Menu />', () => {
       onSignIn={ onSignIn }
       onSignOut={ onSignOut }
       onCreateProfile={ onCreateProfile }
+      onUpdateStatus={ onUpdateStatus }
       user={ user }
     />);
 
-    expect(menuWrapper).to.contain(<UpdateStatus />);
+    expect(menuWrapper).to.contain(<UpdateStatus onUpdateStatus={ onUpdateStatus }/>);
   });
 });

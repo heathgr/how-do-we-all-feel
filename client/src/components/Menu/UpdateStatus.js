@@ -1,4 +1,5 @@
 import React, { Component, PropTypes} from 'react';
+import statuses from '../../../../config/statuses';
 
 class UpdateStatus extends Component {
   constructor (props) {
@@ -8,17 +9,23 @@ class UpdateStatus extends Component {
   render () {
     return <div>
       <h2>Update Your Status...</h2>
-      <button>I am happy</button>
-      <button>I am sad</button>
-      <button>I am bored</button>
-      <button>I am angry</button>
-      <button>I am horny</button>
+      {
+        statuses.map(
+          (status, id) => <button
+            key={id}
+            onClick={this.props.onUpdateStatus.bind(null, id)}
+            id={status + 'StatusButton'}
+          >
+            {'I am feeling ' + status + '.'}
+          </button>
+        )
+      }
     </div>;
   }
 }
 
 UpdateStatus.propTypes = {
-
+  onUpdateStatus: PropTypes.func.isRequired,
 };
 
 export default UpdateStatus;

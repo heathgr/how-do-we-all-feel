@@ -20,40 +20,6 @@ const signIn = () => {
   };
 };
 
-const createProfile = (ageRange, gender) => {
-  return (dispatch) => {
-    const authData = firebaseRef.getAuth();
-
-    console.log('ts', Firebase.ServerValue.TIMESTAMP);
-    if (authData) {
-      //TODO intialize an array for status history?
-      const profile = {
-        displayName: authData.google.displayName,
-        ageRange,
-        gender,
-        status: null,
-        updateTimestamp: Firebase.ServerValue.TIMESTAMP,
-      };
-
-      firebaseRef.child('user-profiles/' + authData.uid + '/').set(profile, (error) => {
-        if (error) {
-          dispatch({
-            type: types.PROFILE_CREATION_FAILED,
-          });
-        } else {
-          dispatch({
-            type: types.PROFILE_CREATION_SUCCESSFUL,
-          });
-        }
-      });
-    } else {
-      dispatch({
-        type: types.PROFILE_CREATION_FAILED,
-      });
-    }
-  };
-};
-
 const listenToAuth = () => {
   return (dispatch, state) => {
     firebaseRef.onAuth(
@@ -106,4 +72,4 @@ const signOut = () => {
   };
 };
 
-export { listenToAuth, signIn, signOut, createProfile };
+export { listenToAuth, signIn, signOut };

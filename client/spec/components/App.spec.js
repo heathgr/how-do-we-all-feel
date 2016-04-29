@@ -25,6 +25,8 @@ describe('<App />', () => {
 
   const onCreateProfile = () => {};
 
+  const onUpdateStatus = () => {};
+
   const appWrapper = mount(<App dispatch={() => {}} user={user} />);
 
   it('should contain a graph component', () => {
@@ -36,6 +38,7 @@ describe('<App />', () => {
       onSignIn={appWrapper.node.onSignIn}
       onSignOut={appWrapper.node.onSignOut}
       onCreateProfile={appWrapper.node.onCreateProfile}
+      onUpdateStatus={appWrapper.node.onUpdateStatus}
       user={user}
     />);
   });

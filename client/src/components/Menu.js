@@ -22,7 +22,7 @@ class Menu extends Component {
         onSignOut={ this.props.onSignOut }
       />;
     } else if (this.props.user.authData.uid && this.props.user.profile) {
-      return <UpdateStatus />;
+      return <UpdateStatus onUpdateStatus={ this.props.onUpdateStatus }/>;
     }
 
     return <div>{menuComponent}</div>;
@@ -34,6 +34,7 @@ Menu.propTypes = {
   onSignIn: PropTypes.func.isRequired,
   onSignOut: PropTypes.func.isRequired,
   onCreateProfile: PropTypes.func.isRequired,
+  onUpdateStatus: PropTypes.func.isRequired,
 };
 
 export default Menu;

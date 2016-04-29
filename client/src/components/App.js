@@ -4,7 +4,8 @@ import Menu from './Menu';
 import Notifications from './Notifications';
 
 import * as authActions from '../actions/AuthActions';
-import * as statusActions from '../actions/StatusActions';
+import * as totalsActions from '../actions/TotalsActions';
+import * as profileActions from '../actions/ProfileActions';
 
 class App extends Component {
   constructor (props) {
@@ -13,11 +14,12 @@ class App extends Component {
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
     this.onCreateProfile = this.onCreateProfile.bind(this);
+    this.onUpdateStatus = this.onUpdateStatus.bind(this);
   }
 
   componentDidMount () {
     this.props.dispatch(authActions.listenToAuth());
-    this.props.dispatch(statusActions.listenToTotals());
+    this.props.dispatch(totalsActions.listenToTotals());
   }
 
   onSignIn () {
@@ -29,7 +31,12 @@ class App extends Component {
   }
 
   onCreateProfile (ageRange, gender) {
-    this.props.dispatch(authActions.createProfile(ageRange, gender));
+    this.props.dispatch(profileActions.createProfile(ageRange, gender));
+  }
+
+  onUpdateStatus (status) {
+    console.log('update status shit: ' + status);
+    this.props.dispatch(profileActions.updateStatus(status));
   }
 
   render () {
@@ -41,6 +48,7 @@ class App extends Component {
         onSignIn={this.onSignIn}
         onSignOut={this.onSignOut}
         onCreateProfile={this.onCreateProfile}
+        onUpdateStatus={this.onUpdateStatus}
       />
     </div>;
   }
