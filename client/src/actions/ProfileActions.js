@@ -11,8 +11,7 @@ const createProfile = (ageRange, gender) => {
         displayName: authData.google.displayName,
         ageRange,
         gender,
-        status: -1,
-        updateTimestamp: Firebase.ServerValue.TIMESTAMP,
+        timestamp: Firebase.ServerValue.TIMESTAMP,
       };
 
       firebaseRef.child('user-profiles/' + authData.uid + '/').set(profile, (error) => {
@@ -34,20 +33,28 @@ const createProfile = (ageRange, gender) => {
   };
 };
 
-const updateStatus = (status) => {
+const listenToProfile = () => {
   return (dispatch) => {
-    const updateRef = firebaseRef.child('status-updates').push();
-    const authData = firebaseRef.getAuth();
-    const update = {
-      uid: authData.uid,
-      status,
-      timeStamp: Firebase.ServerValue.TIMESTAMP,
-    };
-
-    updateRef.set(update, (error) => {
-
-    });
+    firebaseRef.onAuth(
+      (authData) => {
+        if (authData) {
+          firebaseRef.child('user-profiles/' + authData.uid).on('value', (snapshot) => {
+            if (snapshot.exists()) {
+              dispatch({
+                type: types.PROFILE,
+                data: snapshot.val(),
+              });
+            } else {
+              dispatch({
+                type: types.PROFILE,
+                data: false,
+              });
+            }
+          });
+        }
+      }
+    );
   };
 };
 
-export { updateStatus, createProfile };
+export { createProfile, listenToProfile };

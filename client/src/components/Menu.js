@@ -11,18 +11,18 @@ class Menu extends Component {
   render () {
     let menuComponent;
 
-    if (!this.props.user) {
-      menuComponent = null;
-    } else if (!this.props.user.authData && !this.props.user.profile) {
+    if (this.props.user.authData === false) {
       menuComponent = <SignIn onSignIn={this.props.onSignIn}/>;
-    } else if (this.props.user.authData.uid && !this.props.user.profile) {
+    } else if (this.props.user.authData && this.props.user.profile === false) {
       menuComponent = <CreateProfile
         user={ this.props.user }
         onCreateProfile={ this.props.onCreateProfile }
         onSignOut={ this.props.onSignOut }
       />;
-    } else if (this.props.user.authData.uid && this.props.user.profile) {
+    } else if (this.props.user.authData && this.props.user.profile) {
       return <UpdateStatus onUpdateStatus={ this.props.onUpdateStatus }/>;
+    } else {
+      menuComponent = null;
     }
 
     return <div>{menuComponent}</div>;

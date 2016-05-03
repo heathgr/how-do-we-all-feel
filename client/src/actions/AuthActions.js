@@ -20,42 +20,19 @@ const signIn = () => {
   };
 };
 
-const listenToAuth = () => {
-  return (dispatch, state) => {
+const listenToAuthData = () => {
+  return (dispatch, getState) => {
     firebaseRef.onAuth(
       (authData) => {
         if (authData) {
-          if (userProfileRef) userProfileRef.off('value');
-
-          userProfileRef = firebaseRef.child('user-profiles/' + authData.uid);
-          userProfileRef.on('value', (snapshot) => {
-            const profile = snapshot.val();
-
-            if (profile) {
-              dispatch({
-                type: types.AUTH,
-                data: {
-                  authData,
-                  profile,
-                },
-              });
-            } else {
-              dispatch({
-                type: types.AUTH,
-                data: {
-                  authData,
-                  profile: null,
-                },
-              });
-            }
+          dispatch({
+            type: types.AUTH_DATA,
+            data: authData,
           });
         } else {
           dispatch({
-            type: types.AUTH,
-            data: {
-              authData: null,
-              profile: null,
-            },
+            type: types.AUTH_DATA,
+            data: false,
           });
         }
       }
@@ -72,4 +49,4 @@ const signOut = () => {
   };
 };
 
-export { listenToAuth, signIn, signOut };
+export { listenToAuthData, signIn, signOut };

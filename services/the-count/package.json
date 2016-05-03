@@ -1,0 +1,14 @@
+{
+  "name": "the-count",
+  "version": "0.0.1",
+  "description": "a web service that manages status count for \"my how do we all feel\" app",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Grant Heath",
+  "license": "ISC",
+  "dependencies": {
+    "joi": "^8.0.5"
+  }
+}

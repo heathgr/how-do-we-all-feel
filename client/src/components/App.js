@@ -6,6 +6,7 @@ import Notifications from './Notifications';
 import * as authActions from '../actions/AuthActions';
 import * as totalsActions from '../actions/TotalsActions';
 import * as profileActions from '../actions/ProfileActions';
+import * as statusActions from '../actions/statusActions';
 
 class App extends Component {
   constructor (props) {
@@ -18,8 +19,10 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.props.dispatch(authActions.listenToAuth());
+    this.props.dispatch(authActions.listenToAuthData());
+    this.props.dispatch(profileActions.listenToProfile());
     this.props.dispatch(totalsActions.listenToTotals());
+    this.props.dispatch(statusActions.listenToStatus());
   }
 
   onSignIn () {
@@ -35,8 +38,7 @@ class App extends Component {
   }
 
   onUpdateStatus (status) {
-    console.log('update status shit: ' + status);
-    this.props.dispatch(profileActions.updateStatus(status));
+    this.props.dispatch(statusActions.updateStatus(status));
   }
 
   render () {
