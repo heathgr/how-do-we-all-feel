@@ -44,7 +44,9 @@ class App extends Component {
   render () {
     return <div>
       <Notifications/>
-      <Graph/>
+      <Graph
+        totals={this.props.totals}
+      />
       <Menu
         user={this.props.user}
         onSignIn={this.onSignIn}

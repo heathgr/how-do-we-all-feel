@@ -20,7 +20,8 @@ firebaseRef.child('user-statuses').once('value', (snapshot) => {
     }
   );
 
-  console.log('initial status totals: ', totals);
+  console.log('\n              oooOOOooo\n           oOOOOOOOOOOOOOo\n         oOO\"           \"OO\n    ____oOO  ====   ====  OOo____ \n    \\   OO\'      ! !.---. \'OO   /\n     \\  OO   <0> ! !!<0>!  OO  /\n      \\ Oo       ! !\'---\'  oO /\n       \\o        \\_/        o/\n        .\' _______________ \'.\n      ,\'   :   V     V   :   \'.\n    ,\'      -_         _-      \'.\n  ,\'          \"oOOOOOo\"          \'.\n,\'              OOOOO              \'.\n-----------     \"OOO\"     -----------\n                 \"O\"\n\n             THE COUNT\n');
+  console.log('initial count: ', totals);
   totalsRef.set(totals);
 
   firebaseRef.child('user-statuses').on('child_changed', (updateSnapshot) => {
@@ -29,7 +30,8 @@ firebaseRef.child('user-statuses').once('value', (snapshot) => {
     totals[statusData.previousStatus]--;
     totals[statusData.status]++;
 
-    console.log('updated status totals: ', totals);
+    console.log('\nnew update: ', snapshot.exportVal());
+    console.log('updated totals: ', totals);
     totalsRef.set(totals);
   });
 });

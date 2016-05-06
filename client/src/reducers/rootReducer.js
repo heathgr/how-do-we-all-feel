@@ -1,4 +1,5 @@
 import { default as types } from '../constants/ActionTypes';
+import statuses from '../../../config/statuses';
 
 const initialState = {
   user: {
@@ -6,6 +7,7 @@ const initialState = {
     profile: null,
     status: null,
   },
+  totals: statuses.map(() => 0),
 };
 
 const rootReducer = (state = initialState, action) => {
