@@ -11,7 +11,7 @@ class Graph extends Component {
       <h2>The Count</h2>
       {
         statuses.map(
-          (status, id) => <div key={id}>{status + ': ' + this.props.totals[id]}</div>
+          (status, id) => <div key={id}>{status + ': ' + this.props.totals.statusTotals.overall[id]}</div>
         )
       }
     </div>;
@@ -19,7 +19,7 @@ class Graph extends Component {
 }
 
 Graph.propTypes = {
-  totals: PropTypes.array.isRequired,
+  totals: PropTypes.object.isRequired,
 };
 
 export default Graph;

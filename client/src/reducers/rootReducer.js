@@ -7,7 +7,11 @@ const initialState = {
     profile: null,
     status: null,
   },
-  totals: statuses.map(() => 0),
+  totals: {
+    statusTotals: {
+      overall: statuses.map(() => 0),
+    },
+  },
 };
 
 const rootReducer = (state = initialState, action) => {
