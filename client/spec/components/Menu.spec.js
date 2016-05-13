@@ -15,7 +15,7 @@ import UpdateStatus from '../../src/components/Menu/UpdateStatus';
 describe('<Menu />', () => {
   chai.use(chaiEnzyme);
 
-  it('should display nothing is there is no user data.', () => {
+  it('should display nothing if there is no user data.', () => {
     const onSignIn = () => {};
 
     const onSignOut = () => {};
@@ -25,7 +25,11 @@ describe('<Menu />', () => {
     const onUpdateStatus = () => {};
 
     const menuWrapper = mount(<Menu
-      user={null}
+      user={{
+        authData: null,
+        profile: null,
+        statusData: null,
+      }}
       onSignIn={onSignIn}
       onSignOut={onSignOut}
       onCreateProfile={onCreateProfile}
@@ -45,7 +49,7 @@ describe('<Menu />', () => {
     const onUpdateStatus = () => {};
 
     const menuWrapper = mount(<Menu
-      user={{ authData: null, profile: null }}
+      user={{ authData: false, profile: null }}
       onSignIn={onSignIn}
       onSignOut={onSignOut}
       onCreateProfile={onCreateProfile}
@@ -71,7 +75,7 @@ describe('<Menu />', () => {
           displayName: 'Doctor Philastus Hurlbut',
         },
       },
-      profile: null,
+      profile: false,
     };
     const menuWrapper = mount(<Menu
       onSignIn={onSignIn}
@@ -116,6 +120,6 @@ describe('<Menu />', () => {
       user={ user }
     />);
 
-    expect(menuWrapper).to.contain(<UpdateStatus onUpdateStatus={ onUpdateStatus }/>);
+    expect(menuWrapper).to.contain(<UpdateStatus user={user} onUpdateStatus={ onUpdateStatus }/>);
   });
 });

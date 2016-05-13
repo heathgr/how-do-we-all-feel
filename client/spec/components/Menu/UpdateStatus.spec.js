@@ -9,12 +9,17 @@ import React from 'react';
 import UpdateStatus from '../../../src/components/Menu/UpdateStatus';
 import statuses from '../../../../config/statuses';
 
+import statusData from '../../testConstants/statusData';
+
 describe('<UpdateStatus />', () => {
   chai.use(chaiEnzyme());
 
   const onUpdateStatus = sinon.spy();
+  const user = {
+    statusData,
+  };
 
-  const UpdateStatusWrapper = mount(<UpdateStatus onUpdateStatus={onUpdateStatus}/>);
+  const UpdateStatusWrapper = mount(<UpdateStatus onUpdateStatus={onUpdateStatus} user={user} />);
 
   it('Should have an update status button for every status value', () => {
     expect(UpdateStatusWrapper).to.have.exactly(statuses.length).descendants('button');

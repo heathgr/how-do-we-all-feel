@@ -20,7 +20,7 @@ class Menu extends Component {
         onSignOut={ this.props.onSignOut }
       />;
     } else if (this.props.user.authData && this.props.user.profile) {
-      return <UpdateStatus onUpdateStatus={ this.props.onUpdateStatus }/>;
+      return <UpdateStatus user={ this.props.user } onUpdateStatus={ this.props.onUpdateStatus }/>;
     } else {
       menuComponent = null;
     }

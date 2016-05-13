@@ -3,9 +3,7 @@ import { firebaseRef } from '../helpers/firebaseHelpers';
 
 const listenToTotals = () => {
   return (dispatch, getState) => {
-    const totalsRef = firebaseRef.child('totals');
-
-    totalsRef.on('value', (snapshot) => {
+    firebaseRef.child('totals').on('value', (snapshot) => {
       dispatch({
         type: types.TOTALS_UPDATED,
         data: snapshot.val(),

@@ -37,8 +37,8 @@ class App extends Component {
     this.props.dispatch(profileActions.createProfile(ageRange, gender));
   }
 
-  onUpdateStatus (status) {
-    this.props.dispatch(statusActions.updateStatus(status));
+  onUpdateStatus (status, previousStatus) {
+    this.props.dispatch(statusActions.updateStatus(status, previousStatus));
   }
 
   render () {

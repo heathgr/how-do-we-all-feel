@@ -5,6 +5,8 @@ import { mount } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
+import totals from '../testConstants/testTotals';
+
 import App from '../../src/components/App';
 import Graph from '../../src/components/Graph';
 import Menu from '../../src/components/Menu';
@@ -27,10 +29,10 @@ describe('<App />', () => {
 
   const onUpdateStatus = () => {};
 
-  const appWrapper = mount(<App dispatch={() => {}} user={user} />);
+  const appWrapper = mount(<App dispatch={() => {}} user={user} totals={totals}/>);
 
   it('should contain a graph component', () => {
-    expect(appWrapper).to.contain(<Graph/>);
+    expect(appWrapper).to.contain(<Graph totals={totals}/>);
   });
 
   it('should contain a menu component', () => {

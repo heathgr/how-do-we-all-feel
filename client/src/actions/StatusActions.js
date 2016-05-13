@@ -26,18 +26,26 @@ const listenToStatus = () => {
   };
 };
 
-const updateStatus = (status) => {
+const updateStatus = (status, previousStatus) => {
   return (dispatch, getState) => {
     const authData = firebaseRef.getAuth();
 
-    if (authData) {
-      const appState = getState();
-      const previousStatus = appState.user.statusData ? appState.user.statusData.status : -1;
-
+    if (authData && previousStatus != null) {
       firebaseRef.child('user-statuses/' + authData.uid).set({
         status,
         previousStatus,
         timestamp: Firebase.ServerValue.TIMESTAMP,
+      },
+      (error) => {
+        if (error) {
+          dispatch({
+            type: types.STATUS_UPDATE_FAILED,
+          });
+        } else {
+          dispatch({
+            type: types.STATUS_UPDATE_SUCCESSFUL,
+          });
+        }
       });
     } else {
       dispatch({

@@ -5,7 +5,7 @@ const initialState = {
   user: {
     authData: null,
     profile: null,
-    status: null,
+    statusData: null,
   },
   totals: {
     statusTotals: {

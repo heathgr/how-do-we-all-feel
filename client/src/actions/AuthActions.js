@@ -44,7 +44,7 @@ const signOut = () => {
   return (dispatch) => {
     firebaseRef.unauth();
     dispatch({
-      types: types.SIGN_OFF,
+      type: types.SIGN_OFF,
     });
   };
 };
