@@ -1,40 +1,14 @@
-import { default as types } from '../constants/ActionTypes';
-import statuses from '../../../config/statuses';
+import { combineReducers } from 'redux';
+import notifications from './notifications';
+import totals from './totals';
+import user from './user';
 
-const initialState = {
-  user: {
-    authData: null,
-    profile: null,
-    statusData: null,
-  },
-  totals: {
-    statusTotals: {
-      overall: statuses.map(() => 0),
-    },
-  },
-};
-
-const rootReducer = (state = initialState, action) => {
-  let user;
-
-  switch (action.type){
-    case types.AUTH_DATA:
-      user = Object.assign({}, state.user, { authData: action.data });
-
-      return Object.assign({}, state, { user });
-    case types.PROFILE:
-      user = Object.assign({}, state.user, { profile: action.data });
-
-      return Object.assign({}, state, { user });
-    case types.STATUS:
-      user = Object.assign({}, state.user, { statusData: action.data });
-
-      return Object.assign({}, state, { user });
-    case types.TOTALS_UPDATED:
-      return Object.assign({}, state, { totals: action.data });
-    default:
-      return state;
+const rootReducer = combineReducers(
+  {
+    notifications,
+    totals,
+    user,
   }
-};
+);
 
 export default rootReducer;
