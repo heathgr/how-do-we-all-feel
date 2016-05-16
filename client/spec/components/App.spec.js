@@ -21,13 +21,13 @@ describe('<App />', () => {
     profile: null,
   };
 
-  const onSignIn = () => {};
+  const onSignIn = sinon.spy();
 
-  const onSignOut = () => {};
+  const onSignOut = sinon.spy();
 
-  const onCreateProfile = () => {};
+  const onCreateProfile = sinon.spy();
 
-  const onUpdateStatus = () => {};
+  const onUpdateStatus = sinon.spy();
 
   const appWrapper = mount(<App dispatch={() => {}} user={user} totals={totals}/>);
 

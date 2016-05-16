@@ -1,18 +1,18 @@
 var spawn = require('child_process').spawn;
 
-process.env.NODE_PATH = __dirname + '/config/firebase/test/';
+process.env.NODE_PATH = __dirname + '/../config/firebase/test/';
 process.env.BABEL_ENV = 'test';
 
 var mochaThread = spawn(
   'mocha',
   [
     '--require',
-    'client/jsdom.config.js',
+    'jsdom.config.js',
     '--compilers',
     'js:babel-core/register',
     '--recursive',
-    'client/spec/**/*.spec.js',
-    'client/spec/**/**/*.spec.js',
+    'spec/**/*.spec.js',
+    'spec/**/**/*.spec.js',
     '--colors',
   ]
 );

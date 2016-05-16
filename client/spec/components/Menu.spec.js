@@ -16,13 +16,13 @@ describe('<Menu />', () => {
   chai.use(chaiEnzyme);
 
   it('should display nothing if there is no user data.', () => {
-    const onSignIn = () => {};
+    const onSignIn = sinon.spy();
 
-    const onSignOut = () => {};
+    const onSignOut = sinon.spy();
 
-    const onCreateProfile = () => {};
+    const onCreateProfile = sinon.spy();
 
-    const onUpdateStatus = () => {};
+    const onUpdateStatus = sinon.spy();
 
     const menuWrapper = mount(<Menu
       user={{
@@ -40,13 +40,13 @@ describe('<Menu />', () => {
   });
 
   it('should display a sign in component if the user isn\'t authenticated', () => {
-    const onSignIn = () => {};
+    const onSignIn = sinon.spy();
 
-    const onSignOut = () => {};
+    const onSignOut = sinon.spy();
 
-    const onCreateProfile = () => {};
+    const onCreateProfile = sinon.spy();
 
-    const onUpdateStatus = () => {};
+    const onUpdateStatus = sinon.spy();
 
     const menuWrapper = mount(<Menu
       user={{ authData: false, profile: null }}
@@ -60,13 +60,13 @@ describe('<Menu />', () => {
   });
 
   it('should display a create profile component if the user is authenticated and has no profile.', () => {
-    const onSignIn = () => {};
+    const onSignIn = sinon.spy();
 
-    const onSignOut = () => {};
+    const onSignOut = sinon.spy();
 
-    const onCreateProfile = () => {};
+    const onCreateProfile = sinon.spy();
 
-    const onUpdateStatus = () => {};
+    const onUpdateStatus = sinon.spy();
 
     const user = {
       authData: {
@@ -93,13 +93,13 @@ describe('<Menu />', () => {
   });
 
   it('should display an update component if the user is authenticated and has a profile.', () => {
-    const onSignIn = () => {};
+    const onSignIn = sinon.spy();
 
-    const onSignOut = () => {};
+    const onSignOut = sinon.spy();
 
-    const onCreateProfile = () => {};
+    const onCreateProfile = sinon.spy();
 
-    const onUpdateStatus = () => {};
+    const onUpdateStatus = sinon.spy();
 
     const user = {
       authData: {
