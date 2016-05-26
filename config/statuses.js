@@ -4,5 +4,5 @@ module.exports = [
   'bored',
   'stressed',
   'angry',
-  'horny'
+  'horny',
 ];

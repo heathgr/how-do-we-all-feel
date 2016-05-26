@@ -3,7 +3,7 @@ import { default as types } from '../../src/constants/ActionTypes';
 import totals from '../../src/reducers/totals';
 
 describe('totals reducer', () => {
-  it('should modify app state based on totals updated actions', () => {
+  it('should update the app totals when a totals updated action is dispatched', () => {
     const state = {
       overall: [0, 2, 0, 1, 1, 0],
       byGender: [
@@ -42,14 +42,3 @@ describe('totals reducer', () => {
     expect(totals(state, action)).to.deep.equal(expectedState);
   });
 });
-
-/*
-onst initialState = {
-  statusTotals: {
-    overall: statuses.map(() => 0),
-    byGender: genders.map(() => statuses.map(() => 0)),
-    ageRanges: genders.map(() => statuses.map(() => 0)),
-  },
-  overallCount: 0,
-};
-*/

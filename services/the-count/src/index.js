@@ -19,6 +19,16 @@ const start = () => {
       byGender: genders.map(() => statuses.map(() => 0)),
       byAgeRange: ageRanges.map(() => statuses.map(() => 0)),
     },
+    genderTotals: {
+      overall: genders.map(() => 0),
+      byStatus: statuses.map(() => genders.map(() => 0)),
+      byAgeRange: ageRanges.map(() => genders.map(() => 0)),
+    },
+    ageRangeTotals: {
+      overall: ageRanges.map(() => 0),
+      byStatus: statuses.map(() => ageRanges.map(() => 0)),
+      byGender: genders.map(() => ageRanges.map(() => 0)),
+    },
     overallCount: 0,
   };
 
@@ -39,6 +49,12 @@ const start = () => {
               totals.statusTotals.overall[statusData.status]++;
               totals.statusTotals.byGender[userProfile.gender][statusData.status]++;
               totals.statusTotals.byAgeRange[userProfile.ageRange][statusData.status]++;
+              totals.genderTotals.overall[userProfile.gender]++;
+              totals.genderTotals.byStatus[statusData.status][userProfile.gender]++;
+              totals.genderTotals.byAgeRange[userProfile.ageRange][userProfile.gender]++;
+              totals.ageRangeTotals.overall[userProfile.ageRange]++;
+              totals.ageRangeTotals.byStatus[statusData.status][userProfile.ageRange]++;
+              totals.ageRangeTotals.byGender[userProfile.gender][userProfile.ageRange]++;
               totals.overallCount++;
               console.log('initial count: ', totals);
               completedCount++;
@@ -79,4 +95,6 @@ const start = () => {
       });
     });
   });
-}();
+};
+
+start();

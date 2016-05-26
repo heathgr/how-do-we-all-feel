@@ -1,5 +1,8 @@
-import React, { Component, PropTypes} from 'react';
-import statuses from '../../../config/statuses';
+import React, { Component, PropTypes } from 'react';
+import IconGroup from './Graph/IconGroup';
+import TextArc from './Graph/TextArc';
+import OverallCount from './Graph/OverallCount';
+import percentageTextFormatter from '../helpers/graph/percentageTextFormatter';
 
 class Graph extends Component {
   constructor (props) {
@@ -7,19 +10,106 @@ class Graph extends Component {
   }
 
   render () {
-    return <div>
-      <h2>The Count</h2>
+    return <svg width='1000' height='1000'>
+      <IconGroup
+        svgData={this.props.graphData.statusIcons}
+        svgTransforms={this.props.graphData.statusIconTransforms}
+      />
+      <IconGroup
+        svgData={this.props.graphData.ageRangeIcons}
+        svgTransforms={this.props.graphData.ageRangeIconTransforms}
+      />
+      <IconGroup
+        svgData={this.props.graphData.genderIcons}
+        svgTransforms={this.props.graphData.genderIconTransforms}
+      />
+      <TextArc
+        pathData={this.props.graphData.statusTextPaths.title}
+        text='How Do We All Feel?'
+        textId='StatusesTitle'
+      />
+      <TextArc
+        pathData={this.props.graphData.ageRangeTextPaths.title}
+        text='How old is everyone?'
+        textId='AgeRangeTitle'
+      />
+      <TextArc
+        pathData={this.props.graphData.genderTextPaths.title}
+        text='What about gender?'
+        textId='GenderTitle'
+      />
       {
-        statuses.map(
-          (status, id) => <div key={id}>{status + ': ' + this.props.totals.statusTotals.overall[id]}</div>
+        this.props.graphData.statuses.map(
+          (status, id) => <TextArc
+            key={id}
+            pathData={this.props.graphData.statusTextPaths.components[id]}
+            text={status}
+            textId={'statusComponentLabel-' + id}
+          />
         )
       }
-    </div>;
+      {
+        this.props.graphData.ageRanges.map(
+          (ageRange, id) => <TextArc
+            key={id}
+            pathData={this.props.graphData.ageRangeTextPaths.components[id]}
+            text={ageRange}
+            textId={'ageRangeComponentLabel-' + id}
+          />
+        )
+      }
+      {
+        this.props.graphData.genders.map(
+          (gender, id) => <TextArc
+            key={id}
+            pathData={this.props.graphData.genderTextPaths.components[id]}
+            text={gender}
+            textId={'genderComponentLabel-' + id}
+          />
+        )
+      }
+      {
+        this.props.graphData.statuses.map(
+          (status, id) => <TextArc
+            key={id}
+            pathData={this.props.graphData.statusTextPaths.percentages[id]}
+            text={percentageTextFormatter(this.props.percentages.statuses.overall[id])}
+            textId={'statusPercentageLabel-' + id}
+          />
+        )
+      }
+      {
+        this.props.graphData.ageRanges.map(
+          (status, id) => <TextArc
+            key={id}
+            pathData={this.props.graphData.ageRangeTextPaths.percentages[id]}
+            text={percentageTextFormatter(this.props.percentages.ageRanges.overall[id])}
+            textId={'ageRangePercentageLabel-' + id}
+          />
+        )
+      }
+      {
+        this.props.graphData.genders.map(
+          (status, id) => <TextArc
+            key={id}
+            pathData={this.props.graphData.genderTextPaths.percentages[id]}
+            text={percentageTextFormatter(this.props.percentages.genders.overall[id])}
+            textId={'genderPercentageLabel-' + id}
+          />
+        )
+      }
+      <OverallCount
+        overallCount={this.props.totals.overallCount}
+        transform={this.props.graphData.overallTransform}
+      />
+    </svg>;
   }
 }
 
 Graph.propTypes = {
   totals: PropTypes.object.isRequired,
+  percentages: PropTypes.object.isRequired,
+  graphData: PropTypes.object.isRequired,
 };
 
 export default Graph;

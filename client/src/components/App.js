@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import Graph from './Graph';
 import Menu from './Menu';
 import Notifications from './Notifications';
@@ -46,6 +46,8 @@ class App extends Component {
       <Notifications/>
       <Graph
         totals={this.props.totals}
+        percentages={this.props.percentages}
+        graphData={this.props.graphData}
       />
       <Menu
         user={this.props.user}
