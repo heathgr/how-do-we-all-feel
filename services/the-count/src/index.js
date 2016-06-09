@@ -1,100 +1,26 @@
 'use strict';
 
-const Firebase = require('firebase');
-const firebaseConfig = require('../../../config/firebase/development/firebaseConfig');
-const statuses = require('../../../config/statuses');
-const genders = require('../../../config/genders');
-const ageRanges = require('../../../config/ageRanges');
-
-const initializationMessage = require('./initializationMessage');
-const series = require('run-series');
+const startupMessage = require('./startupMessage');
+const calcInitialTotals = require('./calcInitialTotals');
+const watchStatusUpdates = require('./watchStatusUpdates');
+const watchUserProfiles = require('./watchUserProfiles');
 
 const start = () => {
-  const firebaseRef = new Firebase(firebaseConfig.fullUrl);
-  const totalsRef = firebaseRef.child('totals');
-
-  let totals = {
-    statusTotals: {
-      overall: statuses.map(() => 0),
-      byGender: genders.map(() => statuses.map(() => 0)),
-      byAgeRange: ageRanges.map(() => statuses.map(() => 0)),
-    },
-    genderTotals: {
-      overall: genders.map(() => 0),
-      byStatus: statuses.map(() => genders.map(() => 0)),
-      byAgeRange: ageRanges.map(() => genders.map(() => 0)),
-    },
-    ageRangeTotals: {
-      overall: ageRanges.map(() => 0),
-      byStatus: statuses.map(() => ageRanges.map(() => 0)),
-      byGender: genders.map(() => ageRanges.map(() => 0)),
-    },
-    overallCount: 0,
-  };
-
-  const calcInitialCount = (completionCallback) => {
-    firebaseRef.child('user-statuses').once('value', (allUpdatesSnapshot) => {
-      const updateCount = allUpdatesSnapshot.numChildren();
-      let completedCount = 0;
-
-      allUpdatesSnapshot.forEach(
-        (updateSnapshot) => {
-          const statusData = updateSnapshot.val();
-          const uid = updateSnapshot.ref().key();
-
-          if (statusData.status != -1) {
-            firebaseRef.child('user-profiles/' + uid).once('value', (userSnapshot) => {
-              const userProfile = userSnapshot.val();
-
-              totals.statusTotals.overall[statusData.status]++;
-              totals.statusTotals.byGender[userProfile.gender][statusData.status]++;
-              totals.statusTotals.byAgeRange[userProfile.ageRange][statusData.status]++;
-              totals.genderTotals.overall[userProfile.gender]++;
-              totals.genderTotals.byStatus[statusData.status][userProfile.gender]++;
-              totals.genderTotals.byAgeRange[userProfile.ageRange][userProfile.gender]++;
-              totals.ageRangeTotals.overall[userProfile.ageRange]++;
-              totals.ageRangeTotals.byStatus[statusData.status][userProfile.ageRange]++;
-              totals.ageRangeTotals.byGender[userProfile.gender][userProfile.ageRange]++;
-              totals.overallCount++;
-              console.log('initial count: ', totals);
-              completedCount++;
-              if (completedCount === updateCount) completionCallback(null);
-            });
-          }
-        }
-      );
-    });
-  };
-
-  initializationMessage();
-  calcInitialCount(() => {
-    totalsRef.set(totals);
-
-    firebaseRef.child('user-statuses').on('child_changed', (updateSnapshot) => {
-      const statusData = updateSnapshot.val();
-      const uid = updateSnapshot.ref().key();
-
-      firebaseRef.child('user-profiles/' + uid).once('value', (userSnapshot) => {
-        const userProfile = userSnapshot.val();
-
-        if (statusData.previousStatus != -1) {
-          totals.statusTotals.overall[statusData.previousStatus]--;
-          totals.statusTotals.byGender[userProfile.gender][statusData.previousStatus]--;
-          totals.statusTotals.byAgeRange[userProfile.ageRange][statusData.previousStatus]--;
-          totals.overallCount++;
-        }
-
-        if (statusData.status != -1) {
-          totals.statusTotals.overall[statusData.status]++;
-          totals.statusTotals.byGender[userProfile.gender][statusData.status]++;
-          totals.statusTotals.byAgeRange[userProfile.ageRange][statusData.status]++;
-          console.log('\nnew update: ', updateSnapshot.exportVal(), uid);
-          console.log('updated totals: ', totals);
-          totalsRef.set(totals);
-        }
-      });
-    });
-  });
+  startupMessage();
+  calcInitialTotals
+    .then(
+      () => {
+        console.log('initial totals calculated');
+        watchStatusUpdates();
+        watchUserProfiles();
+      }
+    )
+    .catch(
+      (err) => {
+        console.log('[ERROR] It didn\'t work.  Couldn\'t calculate inital totals.  Holly shit snacks....');
+        console.log(err);
+      }
+    );
 };
 
 start();

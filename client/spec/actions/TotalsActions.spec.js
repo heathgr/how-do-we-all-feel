@@ -8,17 +8,15 @@ import { testTotals } from '../testConstants/testTotals';
 describe('Totals Actions', () => {
   it('should dispatch a totals updated action when the firebase totals are updated', () => {
     totalsRewire.__Rewire__('firebaseRef', {
-      child: () => {
-        return {
-          on: (eventType, callback) => {
-            callback(
-              {
-                val: () => testTotals,
-              }
-            );
-          },
-        };
-      },
+      child: () => ({
+        on: (eventType, callback) => {
+          callback(
+            {
+              val: () => testTotals,
+            }
+          );
+        },
+      }),
     });
 
     const dispatch = sinon.spy();

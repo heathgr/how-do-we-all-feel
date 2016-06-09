@@ -9,7 +9,7 @@
   "author": "Grant Heath",
   "license": "ISC",
   "dependencies": {
-    "joi": "^8.0.5",
-    "run-series": "^1.1.4"
+    "firebase": "^3.0.3",
+    "joi": "^8.0.5"
   }
 }

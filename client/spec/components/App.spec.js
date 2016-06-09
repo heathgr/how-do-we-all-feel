@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
@@ -23,16 +23,8 @@ describe('<App />', () => {
     profile: null,
   };
 
-  const onSignIn = sinon.spy();
-
-  const onSignOut = sinon.spy();
-
-  const onCreateProfile = sinon.spy();
-
-  const onUpdateStatus = sinon.spy();
-
   const appWrapper = mount(<App
-    dispatch={() => {}}
+    dispatch={sinon.spy()}
     user={user}
     totals={totals}
     percentages={percentages}

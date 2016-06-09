@@ -5,10 +5,11 @@ const ActionTypes = {
   PROFILE_CREATION_FAILED: 'profile creation failed',
   TOTALS_UPDATED: 'totals updated',
   CONNECTION_ERROR: 'connection error',
-  AUTH_DATA: 'on auth data',
+  AUTH_STATE: 'on auth state changed',
   PROFILE: 'on profile',
   STATUS: 'on status',
-  SIGN_OFF: 'sign off',
+  SIGN_OFF_SUCCESSFUL: 'sign off successful',
+  SIGN_OFF_FAILED: 'sign off failed',
   SIGN_IN_SUCCESSFUL: 'sign in successful',
   SIGN_IN_FAILED: 'sign in failed',
 };

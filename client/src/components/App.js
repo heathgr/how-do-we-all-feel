@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.props.dispatch(authActions.listenToAuthData());
+    this.props.dispatch(authActions.listenToAuthState());
     this.props.dispatch(profileActions.listenToProfile());
     this.props.dispatch(totalsActions.listenToTotals());
     this.props.dispatch(statusActions.listenToStatus());

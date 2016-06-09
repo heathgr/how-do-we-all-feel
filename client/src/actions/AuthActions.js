@@ -1,52 +1,55 @@
-import Firebase from 'firebase';
 import { default as types } from '../constants/ActionTypes';
-import { firebaseRef } from '../helpers/firebaseHelpers';
+import { firebaseAuth, authProvider } from '../helpers/firebaseHelpers';
 
-let userProfileRef = null;
+const signIn = () => (dispatch) => {
+  firebaseAuth.signInWithRedirect(authProvider);
+  firebaseAuth.getRedirectResult().then(
+    (result) => {
+      dispatch({
+        type: types.SIGN_IN_SUCCESSFUL,
+      });
+    }
+  ).catch(
+    (error) => {
+      dispatch({
+        type: types.SIGN_IN_FAILED,
+      });
+    }
+  );
+};
 
-const signIn = () => {
-  return (dispatch) => {
-    firebaseRef.authWithOAuthRedirect('google', (error, authData) => {
-      if (error) {
+const listenToAuthState = () => (dispatch) => {
+  firebaseAuth.onAuthStateChanged(
+    (user) => {
+      if (user) {
         dispatch({
-          type: types.SIGN_IN_FAILED,
+          type: types.AUTH_STATE,
+          data: user,
         });
       } else {
         dispatch({
-          type: types.SIGN_IN_SUCCESSFUL,
+          type: types.AUTH_STATE,
+          data: false,
         });
       }
-    });
-  };
+    }
+  );
 };
 
-const listenToAuthData = () => {
-  return (dispatch, getState) => {
-    firebaseRef.onAuth(
-      (authData) => {
-        if (authData) {
-          dispatch({
-            type: types.AUTH_DATA,
-            data: authData,
-          });
-        } else {
-          dispatch({
-            type: types.AUTH_DATA,
-            data: false,
-          });
-        }
-      }
-    );
-  };
+const signOut = () => (dispatch) => {
+  firebaseAuth.signOut().then(
+    () => {
+      dispatch({
+        type: types.SIGN_OFF_SUCCESSFUL,
+      });
+    }
+  ).catch(
+    (err) => {
+      dispatch({
+        type: types.SIGN_OFF_SUCCESSFUL,
+      });
+    }
+  );
 };
 
-const signOut = () => {
-  return (dispatch) => {
-    firebaseRef.unauth();
-    dispatch({
-      type: types.SIGN_OFF,
-    });
-  };
-};
-
-export { listenToAuthData, signIn, signOut };
+export { listenToAuthState, signIn, signOut };

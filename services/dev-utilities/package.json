@@ -1,0 +1,17 @@
+{
+  "name": "hdwaf-dev-utilities",
+  "version": "0.0.1",
+  "description": "Development utilies for how do we all feel?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Grant Heath",
+  "license": "ISC",
+  "dependencies": {
+    "checkit": "^0.6.0",
+    "figlet": "^1.1.2",
+    "firebase": "^3.0.4",
+    "inquirer": "^1.0.3"
+  }
+}

@@ -1,6 +1,6 @@
 const initializationMessage = () => {
   console.log('');
-  console.log('        INITIALIZING THE COUNT');
+  console.log('              THE COUNT');
   console.log('');
   console.log('              oooOOOooo');
   console.log('           oOOOOOOOOOOOOOo');

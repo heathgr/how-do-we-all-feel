@@ -24,7 +24,7 @@ class CreateProfile extends Component {
       <h2 id='welcomeMessage'>
         {
           'Welcome, ' +
-          this.props.user.authData.google.displayName +
+          this.props.user.authData.displayName +
           '.  Tell us a little bit about yourself.'
         }
       </h2>

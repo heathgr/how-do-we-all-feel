@@ -18,9 +18,7 @@ describe('<CreateProfile />', () => {
   const user = {
     authData: {
       uid: 'google:77773857667',
-      google: {
-        displayName: 'Doctor Philastus Hurlbut',
-      },
+      displayName: 'Doctor Philastus Hurlbut',
     },
     profile: null,
   };

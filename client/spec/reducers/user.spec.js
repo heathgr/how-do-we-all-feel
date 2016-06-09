@@ -18,8 +18,15 @@ describe('user reducer', () => {
       statusData: null,
     };
     const action = {
-      type: types.AUTH_DATA,
-      data: authData,
+      type: types.AUTH_STATE,
+      data: {
+        uid: 'test:00001',
+        providerData: [
+          {
+            displayName: 'Doctor Philastus Hurlbut',
+          },
+        ],
+      },
     };
 
     expect(user(state, action)).to.deep.equal(expectedState);
