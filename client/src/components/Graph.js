@@ -73,7 +73,7 @@ class Graph extends Component {
           (status, id) => <TextArc
             key={id}
             pathData={this.props.graphData.statusTextPaths.percentages[id]}
-            text={percentageTextFormatter(this.props.percentages.statuses.overall[id])}
+            text={percentageTextFormatter(this.props.graphData.percentages.statuses.overall[id])}
             textId={'statusPercentageLabel-' + id}
           />
         )
@@ -83,7 +83,7 @@ class Graph extends Component {
           (status, id) => <TextArc
             key={id}
             pathData={this.props.graphData.ageRangeTextPaths.percentages[id]}
-            text={percentageTextFormatter(this.props.percentages.ageRanges.overall[id])}
+            text={percentageTextFormatter(this.props.graphData.percentages.ageRanges.overall[id])}
             textId={'ageRangePercentageLabel-' + id}
           />
         )
@@ -93,7 +93,7 @@ class Graph extends Component {
           (status, id) => <TextArc
             key={id}
             pathData={this.props.graphData.genderTextPaths.percentages[id]}
-            text={percentageTextFormatter(this.props.percentages.genders.overall[id])}
+            text={percentageTextFormatter(this.props.graphData.percentages.genders.overall[id])}
             textId={'genderPercentageLabel-' + id}
           />
         )
@@ -102,13 +102,27 @@ class Graph extends Component {
         overallCount={this.props.totals.overallCount}
         transform={this.props.graphData.overallTransform}
       />
+
+      {this.props.graphData.sankeyPaths.statuses.map(
+        (sankeyPath) => <path
+          style={{ fill: 'none', stroke: 'black', strokeWidth: '1px' }}
+          d={sankeyPath}
+        />
+      )}
+      {
+        this.props.graphData.sankeyTips.statuses.map(
+          (sankeyTip) => <path
+            style={{ fill: 'none', stroke: 'red', strokeWidth: '3px' }}
+            d={sankeyTip}
+          />
+        )
+      }
     </svg>;
   }
 }
 
 Graph.propTypes = {
   totals: PropTypes.object.isRequired,
-  percentages: PropTypes.object.isRequired,
   graphData: PropTypes.object.isRequired,
 };
 

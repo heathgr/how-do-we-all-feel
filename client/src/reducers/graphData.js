@@ -1,4 +1,4 @@
-import { default as type } from '../constants/ActionTypes';
+import { default as types } from '../constants/ActionTypes';
 import statuses from '../../../config/statuses';
 import ageRanges from '../../../config/ageRanges';
 import genders from '../../../config/genders';
@@ -17,6 +17,10 @@ import {
 } from '../helpers/graph/textPathsHelpers';
 import overallTransform from '../helpers/graph/overallTransform';
 
+import percentagesFromTotals from '../helpers/graph/percentagesFromTotals';
+import sankeyPathsFromPercentages from '../helpers/graph/sankeyPathsFromPercentages';
+import sankeyTipsFromPercentages from '../helpers/graph/sankeyTipsFromPercentages';
+
 const initialState = {
   statusIcons,
   statusIconTransforms,
@@ -31,10 +35,38 @@ const initialState = {
   genderTextPaths,
   genders,
   overallTransform,
+  percentages: { //TODO initialize sub percentages.  ie byAgeRange, byStatus, etc
+    statuses: {
+      overall: statuses.map(() => 0),
+    },
+    genders: {
+      overall: genders.map(() => 0),
+    },
+    ageRanges: {
+      overall: ageRanges.map(() => 0),
+    },
+  },
+  sankeyPaths: {
+    statuses: statuses.map(
+      () => ''
+    ),
+    genders: genders.map(
+      () => ''
+    ),
+    ageRanges: ageRanges.map(
+      () => ''
+    ),
+  },
 };
 
 const graphData = (state = initialState, action) => {
   switch (action.type){
+    case types.TOTALS_UPDATED:
+      const percentages = percentagesFromTotals(action.data);
+      const sankeyPaths = sankeyPathsFromPercentages(percentages);
+      const sankeyTips = sankeyTipsFromPercentages(percentages);
+
+      return Object.assign({}, state, { percentages, sankeyPaths, sankeyTips });
     default:
       return state;
   }

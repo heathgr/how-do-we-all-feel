@@ -13,7 +13,7 @@ const arcSpreadTransforms = (
   bottomTowardsCenter = false
 ) => {
   let transforms = [];
-  let angleStep = (endAngle - startAngle) / (steps - 1);
+  const angleStep = (endAngle - startAngle) / (steps - 1);
 
   for (let i = 0; i < steps; i++) {
     let iterationAngle = startAngle + (angleStep * i);
