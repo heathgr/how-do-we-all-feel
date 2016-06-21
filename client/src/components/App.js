@@ -45,8 +45,6 @@ class App extends Component {
     return <div>
       <Notifications/>
       <Graph
-        totals={this.props.totals}
-        percentages={this.props.percentages}
         graphData={this.props.graphData}
       />
       <Menu

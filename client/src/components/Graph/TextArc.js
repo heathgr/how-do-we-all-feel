@@ -9,7 +9,7 @@ class TextPath extends Component {
     var textStyle = {
       textAnchor: 'middle',
       dominantBaseline: 'middle',
-    }
+    };
 
     return <g>
       <defs>

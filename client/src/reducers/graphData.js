@@ -1,72 +1,41 @@
-import { default as types } from '../constants/ActionTypes';
-import statuses from '../../../config/statuses';
-import ageRanges from '../../../config/ageRanges';
-import genders from '../../../config/genders';
-import statusIcons from '../constants/svgData/statusIcons';
-import ageRangeIcons from '../constants/svgData/ageRangeIcons';
-import genderIcons from '../constants/svgData/genderIcons';
-import {
-  statusIconTransforms,
-  ageRangeIconTransforms,
-  genderIconTransforms
-} from '../helpers/graph/iconSvgDataHelpers';
-import {
-  statusTextPaths,
-  ageRangeTextPaths,
-  genderTextPaths
-} from '../helpers/graph/textPathsHelpers';
-import overallTransform from '../helpers/graph/overallTransform';
+import types from '../constants/ActionTypes';
+import config from '../constants/config';
 
-import percentagesFromTotals from '../helpers/graph/percentagesFromTotals';
-import sankeyPathsFromPercentages from '../helpers/graph/sankeyPathsFromPercentages';
-import sankeyTipsFromPercentages from '../helpers/graph/sankeyTipsFromPercentages';
+import staticGraphData from '../helpers/graph/staticGraphData';
+import sankeyPathsData from '../helpers/graph/sankeyPathsData';
+import updatePercentageLabels from '../helpers/graph/updatePercentageLabels';
+import percentagesFromTotals from '../helpers/graph/math/percentagesFromTotals';
 
-const initialState = {
-  statusIcons,
-  statusIconTransforms,
-  statusTextPaths,
-  statuses,
-  ageRangeIcons,
-  ageRangeIconTransforms,
-  ageRangeTextPaths,
-  ageRanges,
-  genderIcons,
-  genderIconTransforms,
-  genderTextPaths,
-  genders,
-  overallTransform,
-  percentages: { //TODO initialize sub percentages.  ie byAgeRange, byStatus, etc
-    statuses: {
-      overall: statuses.map(() => 0),
-    },
-    genders: {
-      overall: genders.map(() => 0),
-    },
-    ageRanges: {
-      overall: ageRanges.map(() => 0),
-    },
-  },
-  sankeyPaths: {
-    statuses: statuses.map(
-      () => ''
-    ),
-    genders: genders.map(
-      () => ''
-    ),
-    ageRanges: ageRanges.map(
-      () => ''
-    ),
-  },
-};
+const initialState = staticGraphData(config);
 
 const graphData = (state = initialState, action) => {
-  switch (action.type){
+  switch (action.type) {
     case types.TOTALS_UPDATED:
       const percentages = percentagesFromTotals(action.data);
-      const sankeyPaths = sankeyPathsFromPercentages(percentages);
-      const sankeyTips = sankeyTipsFromPercentages(percentages);
+      const updatedPercentageLabels = updatePercentageLabels(
+        state.percentageLabels,
+        [
+          ...percentages.statuses.overall,
+          ...percentages.ageRanges.overall,
+          ...percentages.genders.overall,
+        ]
+      );
+      const sankeyData = sankeyPathsData(
+        config,
+        state.sankeyStatics,
+        {
+          statuses: [...percentages.statuses.overall],
+          ageRanges: [...percentages.ageRanges.overall],
+          genders: [...percentages.genders.overall],
+        }
+      );
 
-      return Object.assign({}, state, { percentages, sankeyPaths, sankeyTips });
+      return Object.assign(
+        {},
+        state,
+        { percentageLabels: updatedPercentageLabels },
+        { sankey: sankeyData }
+      );
     default:
       return state;
   }

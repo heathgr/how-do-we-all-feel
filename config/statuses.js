@@ -1,8 +1,8 @@
 module.exports = [
-  'happy',
-  'sad',
-  'bored',
-  'stressed',
-  'angry',
-  'horny',
+  'Happy',
+  'Sad',
+  'Bored',
+  'Stressed',
+  'Angry',
+  'Horny',
 ];
