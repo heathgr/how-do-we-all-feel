@@ -9,7 +9,7 @@ const cubicPathData = (p1, n1, p2, n2) => {
 
   sub(sa, s);
   sub(ea, e);
-  mult(sa, 1);
+  mult(sa, 0.5);
   mult(ea, 0.5);
   add(sa, s);
   add(ea, e);

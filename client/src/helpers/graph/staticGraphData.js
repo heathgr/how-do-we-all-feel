@@ -1,6 +1,7 @@
 import circularArcData from './svgData/circularArcData';
 import transformationMatrixData from './svgData/transformationMatrixData';
 
+import startBadgeData from './startBadgeData';
 import polarToCartesian from './math/polarToCartesian';
 import sectorSplitter from './math/sectorSplitter';
 import vectorFromPoints from './math/vectorFromPoints';
@@ -68,16 +69,10 @@ const staticGraphData = (config) => {
       )
     );
     let sectorSankeyEndNormals = sectorSankeyEndPoints.map(
-      (sankeyPoint) => mult(
-        vectorFromPoints(config.graphOrigin, sankeyPoint),
-        -config.graphSectors[sector].sankey.endCurviness
-      )
+      (sankeyPoint) => vectorFromPoints(config.graphOrigin, sankeyPoint)
     );
     let sectorSankeySplitNormals = sectorSankeyEndPoints.map(
-      () => mult(
-        copy(config.graphSectors[sector].sankey.splitNormal),
-        config.graphSectors[sector].sankey.splitCurviness
-      )
+      () => copy(config.graphSectors[sector].sankey.splitNormal)
     );
 
     titles.push({
@@ -98,6 +93,8 @@ const staticGraphData = (config) => {
     sankeySplitNormals = [...sankeySplitNormals, ...sectorSankeySplitNormals];
   }
 
+  const startBadge = startBadgeData(config.startBadge, 0);
+
   return {
     titles,
     elementLabels,
@@ -112,6 +109,10 @@ const staticGraphData = (config) => {
       endNormals: sankeyEndNormals,
       splitNormals: sankeySplitNormals,
     },
+    totals: {
+      overallCount: 0,
+    },
+    startBadge,
   };
 };
 

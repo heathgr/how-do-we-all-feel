@@ -5,6 +5,7 @@ import staticGraphData from '../helpers/graph/staticGraphData';
 import sankeyPathsData from '../helpers/graph/sankeyPathsData';
 import updatePercentageLabels from '../helpers/graph/updatePercentageLabels';
 import percentagesFromTotals from '../helpers/graph/math/percentagesFromTotals';
+import startBadgeData from '../helpers/graph/startBadgeData';
 
 const initialState = staticGraphData(config);
 
@@ -29,12 +30,15 @@ const graphData = (state = initialState, action) => {
           genders: [...percentages.genders.overall],
         }
       );
+      const updatedStartBadgeData = startBadgeData(config.startBadge, action.data.overallCount);
 
       return Object.assign(
         {},
         state,
+        { totals: action.data },
         { percentageLabels: updatedPercentageLabels },
-        { sankey: sankeyData }
+        { sankey: sankeyData },
+        { startBadge: updatedStartBadgeData }
       );
     default:
       return state;

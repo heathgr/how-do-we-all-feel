@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import TextArc from './Graph/TextArc';
+import StartBadge from './Graph/StartBadge';
 
 class Graph extends Component {
   constructor (props) {
@@ -69,6 +70,7 @@ class Graph extends Component {
             />
           )
         }
+        <StartBadge data={this.props.graphData.startBadge}/>
       </svg>
     </div>;
   }

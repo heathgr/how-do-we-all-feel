@@ -4,7 +4,7 @@ const triangleData = (origin, normal, width, height) => {
   normalize(normal);
 
   const trianglePoint0 = copy(normal);
-  mult(trianglePoint0, -height);
+  mult(trianglePoint0, height);
   add(trianglePoint0, origin);
 
   const halfWidth = width * 0.5;
