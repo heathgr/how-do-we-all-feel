@@ -50,10 +50,10 @@ class Graph extends Component {
           )
         }
         {
-          this.props.graphData.sankey.pathsData.map(
+          this.props.graphData.sankey.splitPathsData.map(
             (path, id) => <path
               d={path}
-              style={this.props.graphData.sankey.pathStyles[id]}
+              style={this.props.graphData.sankey.splitPathStyles[id]}
               key={id}
             />
           )
@@ -62,10 +62,16 @@ class Graph extends Component {
           this.props.graphData.sankey.tipsData.map(
             (path, id) => <path
               d={path}
-              style={{
-                fill: 'red',
-                opacity: 0.5,
-              }}
+              style={this.props.graphData.sankey.tipStyles[id]}
+              key={id}
+            />
+          )
+        }
+        {
+          this.props.graphData.sankey.startPathsData.map(
+            (path, id) => <path
+              style={this.props.graphData.sankey.startPathStyles[id]}
+              d={path}
               key={id}
             />
           )

@@ -101,7 +101,8 @@ const staticGraphData = (config) => {
     percentageLabels,
     icons,
     sankey: {
-      pathsData: [],
+      startPathsData: [],
+      splitPathsData: [],
       tipsData: [],
     },
     sankeyStatics: {

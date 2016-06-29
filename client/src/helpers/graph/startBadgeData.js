@@ -28,7 +28,7 @@ const startBadgeData = (config, overallCount) => {
     count: 0,
     textPlacements,
     textLines,
-    transform: 'translate(500, 125)',
+    transform: 'translate(' + config.origin.join(',') + ')',
   };
 };
 

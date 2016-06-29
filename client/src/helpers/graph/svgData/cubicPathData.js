@@ -1,20 +1,21 @@
-import { add, sub, mult, copy } from '../math/vectorOperators';
+import { add, sub, mult, mag, copy, normalize } from '../math/vectorOperators';
 import lineIntersection from '../math/lineIntersection';
 
 const cubicPathData = (p1, n1, p2, n2) => {
   const s = copy(p1);
   const e = copy(p2);
-  const sa = lineIntersection(p1, n1, p2, n2);
-  const ea = copy(sa);
+  const dirMag = mag(sub(copy(p1), p2)) * 0.35;
+  const sDir = copy(n1);
+  const eDir = mult(copy(n2), -1);
 
-  sub(sa, s);
-  sub(ea, e);
-  mult(sa, 0.5);
-  mult(ea, 0.5);
-  add(sa, s);
-  add(ea, e);
+  normalize(sDir);
+  normalize(eDir);
+  mult(sDir, dirMag);
+  mult(eDir, dirMag);
+  add(sDir, s);
+  add(eDir, e);
 
-  return 'M' + s.join(',') + 'C' + sa.join(',') + ',' + ea.join(',') + ',' + e.join(',');
+  return 'M' + s.join(',') + 'C' + sDir.join(',') + ',' + eDir.join(',') + ',' + e.join(',');
 };
 
 export default cubicPathData;

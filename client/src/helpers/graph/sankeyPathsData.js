@@ -4,9 +4,11 @@ import triangleData from './svgData/triangleData';
 
 const sankeyPathsData = (config, statics, percentages) => {
   let splitPoints = [];
-
   let pathWidths = [];
+  let pathColors = [];
   let tipHeights = [];
+  let startPathsData = [];
+  let startPathStyles = [];
 
   for (let sector in config.graphSectors) {
     let sectorSplitPoints = pointsAlongSegment(
@@ -17,10 +19,33 @@ const sankeyPathsData = (config, statics, percentages) => {
       config.graphSectors[sector].sankey.invertSplitOrder
     );
 
+    startPathsData = [
+      ...startPathsData,
+      cubicPathData(
+        config.graphSectors[sector].sankey.startOrigin,
+        config.graphSectors[sector].sankey.startNormal,
+        config.graphSectors[sector].sankey.splitOrigin,
+        config.graphSectors[sector].sankey.splitNormal
+      ),
+    ];
+    startPathStyles = [
+      ...startPathStyles,
+      {
+        fill: 'none',
+        stroke: config.graphSectors[sector].colors.sankey,
+        strokeWidth: config.graphSectors[sector].sankey.width,
+      },
+    ];
     pathWidths = [
       ...pathWidths,
       ...percentages[sector].map(
         (percentage) => percentage * config.graphSectors[sector].sankey.width
+      ),
+    ];
+    pathColors = [
+      ...pathColors,
+      ...percentages[sector].map(
+        (percentage) => config.graphSectors[sector].colors.sankey
       ),
     ];
     tipHeights = [
@@ -32,7 +57,7 @@ const sankeyPathsData = (config, statics, percentages) => {
     splitPoints = [...splitPoints, ...sectorSplitPoints];
   }
 
-  const pathsData = splitPoints.map(
+  const splitPathsData = splitPoints.map(
     (splitPoint, id) => cubicPathData(
       splitPoint,
       statics.splitNormals[id],
@@ -41,12 +66,11 @@ const sankeyPathsData = (config, statics, percentages) => {
     )
   );
 
-  const pathStyles = pathWidths.map(
-    (width) => ({
+  const splitPathStyles = pathWidths.map(
+    (width, id) => ({
       fill: 'none',
-      stroke: 'red',
+      stroke: pathColors[id],
       strokeWidth: width,
-      opacity: 0.5,
     })
   );
 
@@ -54,10 +78,20 @@ const sankeyPathsData = (config, statics, percentages) => {
     (point, id) => triangleData(point, statics.endNormals[id], pathWidths[id], tipHeights[id])
   );
 
+  const tipStyles = statics.endPoints.map(
+    (point, id) => ({
+      stroke: 'none',
+      fill: pathColors[id],
+    })
+  );
+
   return {
-    pathsData,
-    pathStyles,
+    startPathsData,
+    startPathStyles,
+    splitPathsData,
+    splitPathStyles,
     tipsData,
+    tipStyles,
   };
 };
 
