@@ -31,6 +31,11 @@ const staticGraphData = (config) => {
           config.graphOrigin,
           isClockwise
         ),
+        style: {
+          fill: config.graphSectors[sector].colors.title,
+          fontSize: config.graphSectors[sector].fontSizes.elements,
+          fontFamily: config.graphSectors[sector].fontFamilies.elements,
+        },
         text: config.graphSectors[sector].elements.text[id],
         textId: sector + '-element-label-' + id,
       })
@@ -43,6 +48,11 @@ const staticGraphData = (config) => {
           config.graphOrigin,
           isClockwise
         ),
+        style: {
+          fill: config.graphSectors[sector].colors.title,
+          fontSize: config.graphSectors[sector].fontSizes.percentages,
+          fontFamily: config.graphSectors[sector].fontFamilies.percentages,
+        },
         text: '0%',
         textId: sector + '-percentage-label-' + id,
       })
@@ -59,6 +69,10 @@ const staticGraphData = (config) => {
           config.graphOrigin,
           config.graphSectors[sector].icons.bottomTowardsCenter
         ),
+        style: {
+          color: config.graphSectors[sector].colors.icons,
+          background: config.graphSectors[sector].colors.iconBackgrounds,
+        },
       })
     );
     let sectorSankeyEndPoints = subSectorCenters.map(
@@ -83,6 +97,11 @@ const staticGraphData = (config) => {
         isClockwise
       ),
       text: config.graphSectors[sector].title.text,
+      style: {
+        fill: config.graphSectors[sector].colors.title,
+        fontFamily: config.graphSectors[sector].fontFamilies.title,
+        fontSize: config.graphSectors[sector].fontSizes.title,
+      },
       textId: sector + '-title',
     });
     elementLabels = [...elementLabels, ...sectorElementLabels];

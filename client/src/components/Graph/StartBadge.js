@@ -8,16 +8,30 @@ class StartBadge extends Component {
   render () {
     var textStyle = {
       textAnchor: 'middle',
-      dominantBaseline: 'middle',
-      fill: 'white',
+      dominantBaseline: 'central',
     };
 
     return <g transform={this.props.data.transform}>
-      <circle cx={0} cy={0} r={this.props.data.radius} />
+      <circle
+        cx={0}
+        cy={0}
+        r={this.props.data.radius}
+        style={{
+          fill: this.props.data.backgroundColor,
+        }}
+      />
       {
         this.props.data.textLines.map(
           (line, id) => <text
-            style={textStyle}
+            style={Object.assign(
+              {},
+              textStyle,
+              {
+                fontFamily: this.props.data.fontFamilies[id],
+                fontSize: this.props.data.fontSizes[id],
+                fill: this.props.data.fontColors[id],
+              }
+            )}
             x={0}
             y={this.props.data.textPlacements[id]}
             key={id}>

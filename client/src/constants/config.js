@@ -44,10 +44,20 @@ const config = {
       colors: {
         sankey: 'yellow',
         title: 'yellow',
-        elemetns: 'yellow',
+        elements: 'yellow',
         percentages: 'yellow',
         icons: 'black',
-        iconBacks: 'yellow',
+        iconBackgrounds: 'yellow',
+      },
+      fontSizes: {
+        title: 40,
+        elements: 15,
+        percentages: 15,
+      },
+      fontFamilies: {
+        title: 'Oswald',
+        elements: 'Open Sans',
+        percentages: 'Open Sans',
       },
     },
     ageRanges: {
@@ -72,7 +82,7 @@ const config = {
         bottomTowardsCenter: true,
       },
       sankey: {
-        width: 50,
+        width: 100,
         startOrigin: [500, 450],
         startNormal: [1, 0],
         splitOrigin: [615, 450],
@@ -84,9 +94,19 @@ const config = {
       colors: {
         sankey: 'red',
         title: 'red',
-        elemetns: 'red',
+        elements: 'red',
         percentages: 'red',
         icons: 'red',
+      },
+      fontSizes: {
+        title: 40,
+        elements: 15,
+        percentages: 15,
+      },
+      fontFamilies: {
+        title: 'Oswald',
+        elements: 'Open Sans',
+        percentages: 'Open Sans',
       },
     },
     genders: {
@@ -111,7 +131,7 @@ const config = {
         bottomTowardsCenter: true,
       },
       sankey: {
-        width: 50,
+        width: 100,
         startOrigin: [500, 450],
         startNormal: [-1, 0],
         splitOrigin: [385, 450],
@@ -123,9 +143,19 @@ const config = {
       colors: {
         sankey: 'orange',
         title: 'orange',
-        elemetns: 'orange',
+        elements: 'orange',
         percentages: 'orange',
         icons: 'orange',
+      },
+      fontSizes: {
+        title: 40,
+        elements: 15,
+        percentages: 15,
+      },
+      fontFamilies: {
+        title: 'Oswald',
+        elements: 'Open Sans',
+        percentages: 'Open Sans',
       },
     },
   },
@@ -143,14 +173,27 @@ const config = {
       null,
     ],
     textLineWeights: [
-      2,
+      1.5,
       1,
       3,
       1,
       1,
       1,
-      2,
+      1.5,
     ],
+    colors: {
+      text: 'white',
+      counter: 'yellow',
+      background: 'green',
+    },
+    fontFamilies: {
+      text: 'Open Sans',
+      counter: 'Oswald',
+    },
+    fontSizes: {
+      text: 15,
+      counter: 40,
+    },
   },
 };
 

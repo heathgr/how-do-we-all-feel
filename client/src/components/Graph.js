@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TextArc from './Graph/TextArc';
 import StartBadge from './Graph/StartBadge';
+import Icon from './Graph/Icon';
 
 class Graph extends Component {
   constructor (props) {
@@ -16,6 +17,7 @@ class Graph extends Component {
               pathData={title.pathData}
               text={title.text}
               textId={title.textId}
+              style={title.style}
               key={id}
             />
           )
@@ -26,6 +28,7 @@ class Graph extends Component {
               pathData={element.pathData}
               text={element.text}
               textId={element.textId}
+              style={element.style}
               key={id}
             />
           )
@@ -36,15 +39,15 @@ class Graph extends Component {
               pathData={percentage.pathData}
               text={percentage.text}
               textId={percentage.textId}
+              style={percentage.style}
               key={id}
             />
           )
         }
         {
           this.props.graphData.icons.map(
-            (icon, id) => <path
-              d={icon.data}
-              transform={icon.transform}
+            (icon, id) => <Icon
+              icon={icon}
               key={id}
             />
           )

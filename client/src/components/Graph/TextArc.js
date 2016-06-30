@@ -6,10 +6,10 @@ class TextPath extends Component {
   }
 
   render () {
-    var textStyle = {
+    var textStyle = Object.assign(this.props.style, {
       textAnchor: 'middle',
       dominantBaseline: 'middle',
-    };
+    });
 
     return <g>
       <defs>
@@ -26,6 +26,7 @@ class TextPath extends Component {
 
 TextPath.propTypes = {
   pathData: PropTypes.string.isRequired,
+  style: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
   textId: PropTypes.string.isRequired,
 };
