@@ -18,5 +18,7 @@ function render() {
   );
 };
 
-store.subscribe(render);
-render();
+window.onload = () => {
+  store.subscribe(render);
+  render();
+};

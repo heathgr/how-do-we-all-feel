@@ -5,9 +5,7 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import React from 'react';
 
-import totals from '../testConstants/testTotals';
 import graphData from '../testConstants/testGraphData';
-import percentages from '../testConstants/testPercentages';
 
 import App from '../../src/components/App';
 import Graph from '../../src/components/Graph';
@@ -26,15 +24,11 @@ describe('<App />', () => {
   const appWrapper = mount(<App
     dispatch={sinon.spy()}
     user={user}
-    totals={totals}
-    percentages={percentages}
     graphData={graphData}
   />);
 
   it('should contain a graph component', () => {
     expect(appWrapper).to.contain(<Graph
-      totals={totals}
-      percentages={percentages}
       graphData={graphData}
     />);
   });

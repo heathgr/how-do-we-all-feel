@@ -10,9 +10,9 @@ import testGraphData from '../../testConstants/testGraphData';
 
 describe('<TextArc />', () => {
 
-  const pathData = testGraphData.statusTextPaths.title;
+  const pathData = testGraphData.titles[0].pathData;
   const text = 'Fo shizzle mah nizzle';
-  const textId = 'thisPrettyMuchBeAnyTextAsLongAsItIsUnique';
+  const textId = 'thisCanBePrettyMuchBeAnyTextAsLongAsItIsUnique';
   const TextArcWrapper = mount(<TextArc
     pathData={pathData}
     text={text}

@@ -1,0 +1,41 @@
+{
+  "radius": 90,
+  "count": 0,
+  "textPlacements": [
+    -54,
+    -17.999999999999986,
+    18,
+    36,
+    54
+  ],
+  "textLines": [
+    "There are",
+    0,
+    "users who have let",
+    "us know how they",
+    "are feeling"
+  ],
+  "transform": "translate(500,450)",
+  "fontFamilies": [
+    "Open Sans",
+    "Oswald",
+    "Open Sans",
+    "Open Sans",
+    "Open Sans"
+  ],
+  "fontSizes": [
+    15,
+    40,
+    15,
+    15,
+    15
+  ],
+  "fontColors": [
+    "white",
+    "yellow",
+    "white",
+    "white",
+    "white"
+  ],
+  "backgroundColor": "green"
+}
