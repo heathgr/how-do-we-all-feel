@@ -6,13 +6,18 @@ const initialState = {
   statusData: null,
 };
 
+//displayName: action.data.providerData[0].displayName,
+
 const user = (state = initialState, action) => {
+
+  console.log('action shit', action);
+
   switch (action.type){
     case types.AUTH_STATE:
       return Object.assign({}, state, {
         authData: {
           uid: action.data.uid,
-          displayName: action.data.providerData[0].displayName,
+          displayName: 'bob',
         },
       });
     case types.PROFILE:

@@ -1,9 +1,10 @@
-const url = 'https://how-do-we-all-feel.firebaseio.com/';
+const url = 'https://hdwaf-development.firebaseio.com/';
 const port = null;
 const fullUrl = url;
 
 module.exports = {
-  url,
-  port,
-  fullUrl,
+  apiKey: "AIzaSyAMKII774DISZkKErqKttWVYH68IViLfVA",
+  authDomain: "hdwaf-development.firebaseapp.com",
+  databaseURL: "https://hdwaf-development.firebaseio.com",
+  storageBucket: "firebase-hdwaf-development.appspot.com",
 };
