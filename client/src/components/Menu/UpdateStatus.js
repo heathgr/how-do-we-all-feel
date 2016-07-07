@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import statuses from '../../../../config/statuses';
 
 class UpdateStatus extends Component {

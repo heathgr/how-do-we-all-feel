@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import SignIn from './Menu/SignIn';
 import CreateProfile from './Menu/CreateProfile';
 import UpdateStatus from './Menu/UpdateStatus';
@@ -29,7 +29,13 @@ class Menu extends Component {
       menuComponent = null;
     }
 
-    return <div>{menuComponent}</div>;
+    return <div
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        height: 100,
+      }}
+    >{menuComponent}</div>;
   }
 }
 

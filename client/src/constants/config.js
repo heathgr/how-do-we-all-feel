@@ -11,8 +11,8 @@ const config = {
   graphOrigin: [500, 500],
   graphSectors: {
     statuses: {
-      startAngle: 135 * degToRad,
-      endAngle: 45 * degToRad,
+      startAngle: ((6 / 14) * 360) * degToRad,
+      endAngle: 0 * degToRad,
       title: {
         radius: 450,
         text: 'How Do We All Feel?',
@@ -42,12 +42,12 @@ const config = {
         endRadius: 225,
       },
       colors: {
-        sankey: 'yellow',
-        title: 'yellow',
-        elements: 'yellow',
-        percentages: 'yellow',
-        icons: 'black',
-        iconBackgrounds: 'yellow',
+        sankey: '#F1EE1F',
+        title: '#F1EE1F',
+        elements: '#F1EE1F',
+        percentages: '#F1EE1F',
+        icons: '#333333',
+        iconBackgrounds: '#F1EE1F',
       },
       fontSizes: {
         title: 40,
@@ -61,8 +61,8 @@ const config = {
       },
     },
     ageRanges: {
-      startAngle: -45 * degToRad,
-      endAngle: 30 * degToRad,
+      startAngle: ((9 / 14) * 360) * degToRad,
+      endAngle: ((14 / 14) * 360) * degToRad,
       title: {
         radius: 450,
         text: 'How old is everyone?',
@@ -92,11 +92,11 @@ const config = {
         endRadius: 225,
       },
       colors: {
-        sankey: 'red',
-        title: 'red',
-        elements: 'red',
-        percentages: 'red',
-        icons: 'red',
+        sankey: '#CC7C2D',
+        title: '#CC7C2D',
+        elements: '#CC7C2D',
+        percentages: '#CC7C2D',
+        icons: '#CC7C2D',
       },
       fontSizes: {
         title: 40,
@@ -110,8 +110,8 @@ const config = {
       },
     },
     genders: {
-      startAngle: 180 * degToRad,
-      endAngle: 225 * degToRad,
+      startAngle: ((6 / 14) * 360) * degToRad,
+      endAngle: ((9 / 14) * 360) * degToRad,
       title: {
         radius: 450,
         text: 'What about gender?',
@@ -141,11 +141,11 @@ const config = {
         endRadius: 225,
       },
       colors: {
-        sankey: 'orange',
-        title: 'orange',
-        elements: 'orange',
-        percentages: 'orange',
-        icons: 'orange',
+        sankey: '#3E993D',
+        title: '#3E993D',
+        elements: '#3E993D',
+        percentages: '#3E993D',
+        icons: '#3E993D',
       },
       fontSizes: {
         title: 40,
@@ -183,8 +183,8 @@ const config = {
     ],
     colors: {
       text: 'white',
-      counter: 'yellow',
-      background: 'green',
+      counter: '#F1EE1F',
+      background: '#333333',
     },
     fontFamilies: {
       text: 'Open Sans',

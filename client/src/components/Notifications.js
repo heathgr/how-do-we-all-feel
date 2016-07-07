@@ -1,4 +1,4 @@
-import React, { Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class Notifications extends Component {
   constructor (props) {
@@ -6,7 +6,7 @@ class Notifications extends Component {
   }
 
   render () {
-    return <div>Notifications will go here</div>;
+    return <div></div>;
   }
 }
 

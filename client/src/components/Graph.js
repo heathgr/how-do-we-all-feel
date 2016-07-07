@@ -19,7 +19,14 @@ class Graph extends Component {
         }}
       >
       <svg width='100%' height='100%' preserveAspectRatio='xMidYMid' viewBox='0 0 1000 1000'>
-        <circle cx={500} cy={500} r={500} />
+        <circle
+          style={{
+            fill: '#443D4C',
+          }}
+          cx={500}
+          cy={500}
+          r={500}
+        />
         {
           this.props.graphData.titles.map(
             (title, id) => <TextArc
