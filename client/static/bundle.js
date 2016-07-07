@@ -19936,7 +19936,7 @@
 	    value: function render() {
 	      var menuComponent = void 0;
 
-	      if (this.props.user.authData === false) {
+	      if (this.props.user.authData === null) {
 	        menuComponent = _react2.default.createElement(_SignIn2.default, { onSignIn: this.props.onSignIn });
 	      } else if (this.props.user.authData && this.props.user.profile === false) {
 	        menuComponent = _react2.default.createElement(_CreateProfile2.default, {
@@ -19945,10 +19945,16 @@
 	          onSignOut: this.props.onSignOut
 	        });
 	      } else if (this.props.user.authData && this.props.user.profile) {
-	        return _react2.default.createElement(_UpdateStatus2.default, { user: this.props.user, onUpdateStatus: this.props.onUpdateStatus });
+	        menuComponent = _react2.default.createElement(_UpdateStatus2.default, {
+	          user: this.props.user,
+	          onUpdateStatus: this.props.onUpdateStatus,
+	          onSignOut: this.props.onSignOut
+	        });
 	      } else {
 	        menuComponent = null;
 	      }
+
+	      console.log('menu Component', menuComponent);
 
 	      return _react2.default.createElement(
 	        'div',
@@ -20241,7 +20247,12 @@
 	            },
 	            'I am feeling ' + status + '.'
 	          );
-	        })
+	        }),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.props.onSignOut },
+	          'Sign Out'
+	        )
 	      );
 	    }
 	  }]);
@@ -20251,6 +20262,7 @@
 
 	UpdateStatus.propTypes = {
 	  onUpdateStatus: _react.PropTypes.func.isRequired,
+	  onSignOut: _react.PropTypes.func.isRequired,
 	  user: _react.PropTypes.object.isRequired
 	};
 
@@ -21114,12 +21126,9 @@
 	  return function (dispatch) {
 	    var user = _firebaseHelpers.firebaseAuth.currentUser;
 
-	    //displayName: user.providerData[0].displayName,
-	    console.log('current user', user);
-
 	    if (user) {
 	      var profile = {
-	        displayName: 'bob',
+	        displayName: user.providerData[0].displayName,
 	        ageRange: ageRange,
 	        gender: gender,
 	        timestamp: _firebaseHelpers.timestamp
@@ -22193,23 +22202,18 @@
 	  statusData: null
 	};
 
-	//displayName: action.data.providerData[0].displayName,
-
 	var user = function user() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
 	  var action = arguments[1];
 
-
-	  console.log('action shit', action);
-
 	  switch (action.type) {
 	    case _ActionTypes2.default.AUTH_STATE:
-	      return Object.assign({}, state, {
+	      return action.data ? Object.assign({}, state, {
 	        authData: {
 	          uid: action.data.uid,
-	          displayName: 'bob'
+	          displayName: action.data.providerData[0].displayName
 	        }
-	      });
+	      }) : state;
 	    case _ActionTypes2.default.PROFILE:
 	      return Object.assign({}, state, { profile: action.data });
 	    case _ActionTypes2.default.STATUS:

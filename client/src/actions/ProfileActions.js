@@ -4,12 +4,9 @@ import { firebaseRef, firebaseAuth, timestamp } from '../helpers/firebaseHelpers
 const createProfile = (ageRange, gender) => (dispatch) => {
   const user = firebaseAuth.currentUser;
 
-  //displayName: user.providerData[0].displayName,
-  console.log('current user', user);
-
   if (user) {
     const profile = {
-      displayName: 'bob',
+      displayName: user.providerData[0].displayName,
       ageRange,
       gender,
       timestamp,

@@ -11,7 +11,7 @@ class Menu extends Component {
   render () {
     let menuComponent;
 
-    if (this.props.user.authData === false) {
+    if (this.props.user.authData === null) {
       menuComponent = <SignIn onSignIn={this.props.onSignIn}/>;
     } else if (this.props.user.authData && this.props.user.profile === false) {
       menuComponent = <CreateProfile
@@ -20,7 +20,11 @@ class Menu extends Component {
         onSignOut={ this.props.onSignOut }
       />;
     } else if (this.props.user.authData && this.props.user.profile) {
-      return <UpdateStatus user={ this.props.user } onUpdateStatus={ this.props.onUpdateStatus }/>;
+      menuComponent = <UpdateStatus
+        user={ this.props.user }
+        onUpdateStatus={ this.props.onUpdateStatus }
+        onSignOut={ this.props.onSignOut }
+      />;
     } else {
       menuComponent = null;
     }

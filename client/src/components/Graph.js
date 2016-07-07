@@ -9,8 +9,17 @@ class Graph extends Component {
   }
 
   render () {
-    return <div>
-      <svg width='1000' height='1000'>
+    return <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 100,
+        }}
+      >
+      <svg width='100%' height='100%' preserveAspectRatio='xMidYMid' viewBox='0 0 1000 1000'>
+        <circle cx={500} cy={500} r={500} />
         {
           this.props.graphData.titles.map(
             (title, id) => <TextArc

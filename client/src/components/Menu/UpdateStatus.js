@@ -24,12 +24,14 @@ class UpdateStatus extends Component {
           </button>
         )
       }
+      <button onClick = {this.props.onSignOut}>Sign Out</button>
     </div>;
   }
 }
 
 UpdateStatus.propTypes = {
   onUpdateStatus: PropTypes.func.isRequired,
+  onSignOut: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
 };
 
