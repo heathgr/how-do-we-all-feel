@@ -46,7 +46,7 @@ const signOut = () => (dispatch) => {
   ).catch(
     (err) => {
       dispatch({
-        type: types.SIGN_OFF_SUCCESSFUL,
+        type: types.SIGN_OFF_FAILED,
       });
     }
   );

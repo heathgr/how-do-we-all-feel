@@ -1,12 +1,16 @@
 import polarToCartesian from '../math/polarToCartesian';
 import vectorFromPoints from '../math/vectorFromPoints';
+import { sub, add, mult, normalize, copy } from '../math/vectorOperators';
 
-const transformationMatrixData = (radius, angle, origin, bottomTowardsCenter) => {
-  const translatePoint = polarToCartesian(radius, angle, origin);
-  const yVector = bottomTowardsCenter ?
+const transformationMatrixData = (radius, angle, origin, scale, bottomTowardsCenter) => {
+  let translatePoint = polarToCartesian(radius, angle, origin);
+  let yVector = bottomTowardsCenter ?
     vectorFromPoints(translatePoint, origin) :
     vectorFromPoints(origin, translatePoint);
-  const xVector = [yVector[1], -yVector[0]];
+
+  mult(yVector, scale);
+
+  let xVector = [yVector[1], -yVector[0]];
 
   return 'matrix(' +
     xVector[0] +

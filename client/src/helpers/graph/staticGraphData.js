@@ -5,6 +5,7 @@ import startBadgeData from './startBadgeData';
 import polarToCartesian from './math/polarToCartesian';
 import sectorSplitter from './math/sectorSplitter';
 import vectorFromPoints from './math/vectorFromPoints';
+import normalFromAngle from './math/normalFromAngle';
 import { sub, add, mult, normalize, copy } from './math/vectorOperators';
 
 const staticGraphData = (config) => {
@@ -12,9 +13,9 @@ const staticGraphData = (config) => {
   let elementLabels = [];
   let percentageLabels = [];
   let icons = [];
-  let sankeySplitNormals = [];
   let sankeyEndPoints = [];
   let sankeyEndNormals = [];
+  let sankeySplitNormals = [];
 
   for (let sector in config.graphSectors) {
     const sectorAngles = [
@@ -22,6 +23,9 @@ const staticGraphData = (config) => {
       config.graphSectors[sector].endAngle,
     ];
     const isClockwise = sectorAngles[0] < sectorAngles[1];
+    let sectorNormal = normalFromAngle(
+      (config.graphSectors[sector].startAngle + config.graphSectors[sector].endAngle) * 0.5
+    );
     let subSectors = sectorSplitter(sectorAngles, config.graphSectors[sector].elements.count);
     let sectorElementLabels = subSectors.map(
       (subSector, id) => ({
@@ -67,6 +71,7 @@ const staticGraphData = (config) => {
           config.graphSectors[sector].icons.radius,
           centerAngle,
           config.graphOrigin,
+          config.graphSectors[sector].icons.scale,
           config.graphSectors[sector].icons.bottomTowardsCenter
         ),
         style: {
@@ -86,7 +91,7 @@ const staticGraphData = (config) => {
       (sankeyPoint) => vectorFromPoints(config.graphOrigin, sankeyPoint)
     );
     let sectorSankeySplitNormals = sectorSankeyEndPoints.map(
-      () => copy(config.graphSectors[sector].sankey.splitNormal)
+      (sankeyPoint) => sectorNormal
     );
 
     titles.push({

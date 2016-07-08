@@ -1,6 +1,9 @@
 import pointsAlongSegment from './math/pointsAlongSegment';
+import polarToCartesian from './math/polarToCartesian';
+import normalFromAngle from './math/normalFromAngle';
 import cubicPathData from './svgData/cubicPathData';
 import triangleData from './svgData/triangleData';
+import { sub, add, mult, normalize, copy } from './math/vectorOperators';
 
 const sankeyPathsData = (config, statics, percentages) => {
   let splitPoints = [];
@@ -11,9 +14,21 @@ const sankeyPathsData = (config, statics, percentages) => {
   let startPathStyles = [];
 
   for (let sector in config.graphSectors) {
+    const sankeyAngle = (config.graphSectors[sector].startAngle +
+      config.graphSectors[sector].endAngle)
+      * 0.5;
+    const startOrigin = config.graphOrigin;
+    const startNormal = normalFromAngle(sankeyAngle);
+    const splitOrigin = polarToCartesian(
+      config.graphSectors[sector].sankey.startRadius,
+      sankeyAngle,
+      startOrigin
+    );
+    const splitNormal = mult(copy(startNormal), -1);
+
     let sectorSplitPoints = pointsAlongSegment(
-      config.graphSectors[sector].sankey.splitNormal,
-      config.graphSectors[sector].sankey.splitOrigin,
+      splitNormal,
+      splitOrigin,
       config.graphSectors[sector].sankey.width,
       percentages[sector],
       config.graphSectors[sector].sankey.invertSplitOrder
@@ -21,12 +36,7 @@ const sankeyPathsData = (config, statics, percentages) => {
 
     startPathsData = [
       ...startPathsData,
-      cubicPathData(
-        config.graphSectors[sector].sankey.startOrigin,
-        config.graphSectors[sector].sankey.startNormal,
-        config.graphSectors[sector].sankey.splitOrigin,
-        config.graphSectors[sector].sankey.splitNormal
-      ),
+      'M' + startOrigin.join(',') + 'L' + splitOrigin.join(','),
     ];
     startPathStyles = [
       ...startPathStyles,
@@ -57,11 +67,25 @@ const sankeyPathsData = (config, statics, percentages) => {
     splitPoints = [...splitPoints, ...sectorSplitPoints];
   }
 
+  //start and end points are offset by half a pixel to
+  //remove a seam that sometimes occurs when rendering the svg
+
   const splitPathsData = splitPoints.map(
     (splitPoint, id) => cubicPathData(
-      splitPoint,
+      add(
+        copy(splitPoint),
+        mult(
+          copy(statics.splitNormals[id]),
+          -0.5
+        )
+      ),
       statics.splitNormals[id],
-      statics.endPoints[id],
+      add(
+        copy(statics.endPoints[id]),
+        mult(
+          copy(statics.endNormals[id]),
+          0.5)
+      ),
       statics.endNormals[id]
     )
   );

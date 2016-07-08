@@ -7,7 +7,7 @@ class SignIn extends Component {
 
   render () {
     return <div>
-      <div>Want to participate?</div>
+      <h2>Want to participate?</h2>
       <button onClick={ this.props.onSignIn }>Sign In With Your Google Account</button>
     </div>;
   }
