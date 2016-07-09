@@ -9,25 +9,27 @@ class Menu extends Component {
   }
 
   render () {
-    let menuComponent;
-
-    if (this.props.user.authData === null) {
-      menuComponent = <SignIn onSignIn={this.props.onSignIn}/>;
-    } else if (this.props.user.authData && this.props.user.profile === false) {
-      menuComponent = <CreateProfile
-        user={ this.props.user }
-        onCreateProfile={ this.props.onCreateProfile }
-        onSignOut={ this.props.onSignOut }
-      />;
-    } else if (this.props.user.authData && this.props.user.profile) {
-      menuComponent = <UpdateStatus
-        user={ this.props.user }
-        onUpdateStatus={ this.props.onUpdateStatus }
-        onSignOut={ this.props.onSignOut }
-      />;
-    } else {
-      menuComponent = null;
-    }
+    const getMenuComponent = () => {
+      if (this.props.user.authData === null) {
+        return null;
+      } else if (this.props.user.authData.uid === null) {
+        return <SignIn onSignIn={this.props.onSignIn}/>;
+      } else if (this.props.user.authData && this.props.user.profile === false) {
+        return <CreateProfile
+          user={ this.props.user }
+          onCreateProfile={ this.props.onCreateProfile }
+          onSignOut={ this.props.onSignOut }
+        />;
+      } else if (this.props.user.authData && this.props.user.statusData) {
+        return <UpdateStatus
+          user={ this.props.user }
+          onUpdateStatus={ this.props.onUpdateStatus }
+          onSignOut={ this.props.onSignOut }
+        />;
+      } else {
+        null;
+      }
+    };
 
     return <div
       style={{
@@ -37,8 +39,9 @@ class Menu extends Component {
         left: 0,
         right: 0,
         height: 100,
+        textAlign: 'center',
       }}
-    >{menuComponent}</div>;
+    >{getMenuComponent()}</div>;
   }
 }
 
@@ -48,6 +51,26 @@ Menu.propTypes = {
   onSignOut: PropTypes.func.isRequired,
   onCreateProfile: PropTypes.func.isRequired,
   onUpdateStatus: PropTypes.func.isRequired,
+};
+
+const getMenuComponent = () => {
+  if (this.props.user.authData === null) {
+    return <SignIn onSignIn={this.props.onSignIn}/>;
+  } else if (this.props.user.authData && this.props.user.profile === false) {
+    return <CreateProfile
+      user={ this.props.user }
+      onCreateProfile={ this.props.onCreateProfile }
+      onSignOut={ this.props.onSignOut }
+    />;
+  } else if (this.props.user.authData && this.props.user.profile) {
+    return <UpdateStatus
+      user={ this.props.user }
+      onUpdateStatus={ this.props.onUpdateStatus }
+      onSignOut={ this.props.onSignOut }
+    />;
+  } else {
+    null;
+  }
 };
 
 export default Menu;

@@ -8,22 +8,24 @@ class UpdateStatus extends Component {
 
   render () {
     return <div>
-      <h2>Update Your Status...</h2>
-      {
-        statuses.map(
-          (status, id) => <button
-            key={id}
-            onClick={this.props.onUpdateStatus.bind(
-              null,
-              id,
-              this.props.user.statusData ? this.props.user.statusData.status : null
-            )}
-            id={status + 'StatusButton'}
-          >
-            {'I am feeling ' + status + '.'}
-          </button>
-        )
-      }
+      <h2>How Do You Feel Today?</h2>
+      <div>
+        {
+          statuses.map(
+            (status, id) => <button
+              key={id}
+              onClick={this.props.onUpdateStatus.bind(
+                null,
+                id,
+                this.props.user.statusData ? this.props.user.statusData.status : null
+              )}
+              id={status + 'StatusButton'}
+            >
+              {'I am feeling ' + status + '.'}
+            </button>
+          )
+        }
+      </div>
       <button onClick = {this.props.onSignOut}>Sign Out</button>
     </div>;
   }

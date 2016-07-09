@@ -14,7 +14,12 @@ const user = (state = initialState, action) => {
           uid: action.data.uid,
           displayName: action.data.providerData[0].displayName,
         },
-      }) : state;
+      }) : Object.assign({}, state, {
+        authData: {
+          uid: null,
+          displayName: null,
+        },
+      });
     case types.PROFILE:
       return Object.assign({}, state, { profile: action.data });
     case types.STATUS:

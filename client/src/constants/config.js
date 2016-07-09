@@ -66,7 +66,7 @@ const config = {
       endAngle: 372.5 * degToRad,
       title: {
         radius: 450 * ageRangeMultiplier,
-        text: 'How old is everyone?',
+        text: 'How Old is Everyone?',
       },
       elements: {
         radius: 400 * ageRangeMultiplier,
@@ -114,7 +114,7 @@ const config = {
       endAngle: 235.5 * degToRad,
       title: {
         radius: 450 * genderMultiplier,
-        text: 'What about gender?',
+        text: 'What About Gender?',
       },
       elements: {
         radius: 400 * genderMultiplier,
@@ -133,7 +133,7 @@ const config = {
       },
       sankey: {
         width: 100 * genderMultiplier,
-        startRadius: 110 * genderMultiplier,
+        startRadius: 105,
         splitRadius: 200 * genderMultiplier,
         invertSplitOrder: false,
         tipHeight: 7.5 * genderMultiplier,
@@ -165,8 +165,8 @@ const config = {
     textLines: [
       null,
       'count',
-      'users have let us know',
-      'how they are feeling',
+      'users have shared how',
+      'they are feeling',
       null,
     ],
     textLineWeights: [
